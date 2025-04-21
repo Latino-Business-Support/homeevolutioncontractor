@@ -21,3 +21,18 @@ export type InfoT = {
     map: string;
     history: string;
 };
+
+export type ServiceT = {
+    id: number;
+    name: string;
+    slug: string;
+    image: string;
+    image_url: string;
+    description: string;
+};
+
+export type ProjectT = {
+    id: number;
+    image: string;
+    image_url: string;
+};

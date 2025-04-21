@@ -1,37 +1,67 @@
 import { useAppearance } from '@/hooks/use-appearance';
 import { cn } from '@/lib/utils';
-import { Link } from '@inertiajs/react';
-import { Facebook, Instagram, Linkedin, Monitor, Moon, Sun, Twitter } from 'lucide-react';
+import type { InfoT } from '@/types';
+import { Link, usePage } from '@inertiajs/react';
+import { Facebook, Instagram, Linkedin, Menu, Monitor, Moon, Sun, Twitter, X } from 'lucide-react';
+import { useState } from 'react';
+import { ComponentIcon } from './ComponentIcon';
 
 export default function Header() {
+    const { info } = usePage().props as unknown as { info: InfoT };
+    const [open, setOpen] = useState(false);
     return (
-        <header className="sticky top-0 bg-black/10 px-5 py-5">
-            <div className="container mx-auto flex items-center gap-5">
-                <nav className="flex flex-1 items-center justify-between">
-                    <ul className="flex items-center gap-5">
-                        <NavOption href={route('home')} label="Home" />
-                        <NavOption href={route('home')} label="About" />
-                        <NavOption href={route('home')} label="Services" />
-                        <NavOption href={route('home')} label="Projects" />
-                        <NavOption href={route('home')} label="Contact" />
-                    </ul>
-                    <ul className="flex items-center gap-5">
-                        <span>Social Media:</span>
-                        <SocialOption href="#" icon={Facebook} />
-                        <SocialOption href="#" icon={Instagram} />
-                        <SocialOption href="#" icon={Twitter} />
-                        <SocialOption href="#" icon={Linkedin} />
-                    </ul>
-                </nav>
-                <ButtonApperance />
-            </div>
-        </header>
+        <>
+            <header className="sticky top-0 z-20">
+                <div className="relative h-18 px-5 text-white">
+                    <div className="bg-c3 absolute inset-0 -z-[1] [animation:header-scroll-light_0.3s_linear_both] [animation-range:140px_250px] [animation-timeline:_scroll()] dark:bg-transparent" />
+                    <div className="relative z-[1] container mx-auto flex h-full items-center gap-5">
+                        <img className="h-full lg:hidden" src={info.logo} alt={'Logo of ' + info.name} />
+                        <nav
+                            className={cn(
+                                'dark:bg-c3 fixed top-0 left-0 z-10 flex h-full w-full max-w-66 flex-1 -translate-x-full flex-col items-center justify-between bg-white p-10 text-black transition-all duration-500 dark:text-white',
+                                'lg:static lg:max-w-none lg:translate-x-0 lg:flex-row lg:bg-transparent lg:p-0 lg:text-white lg:dark:bg-transparent',
+                                { 'translate-x-0': open },
+                            )}
+                        >
+                            <ul className={cn('flex flex-col items-start gap-5', 'lg:flex-row lg:items-center')}>
+                                <img className="w-full lg:hidden" src={info.logo} alt={'Logo of ' + info.name} />
+                                <NavOption href={route('home')} label="Home" />
+                                <NavOption href={route('home')} label="About" />
+                                <NavOption href={route('home')} label="Services" />
+                                <NavOption href={route('home')} label="Projects" />
+                                <NavOption href={route('home')} label="Contact" />
+                            </ul>
+                            <ul className="flex items-center gap-5">
+                                <span className="hidden lg:inline">Social Media:</span>
+                                <SocialOption href="#" icon={Facebook} />
+                                <SocialOption href="#" icon={Instagram} />
+                                <SocialOption href="#" icon={Twitter} />
+                                <SocialOption href="#" icon={Linkedin} />
+                            </ul>
+                        </nav>
+                        <div
+                            className={cn('fixed inset-0 bg-white/10 backdrop-blur-sm lg:hidden dark:bg-black/10', { hidden: !open })}
+                            onClick={() => setOpen(false)}
+                        />
+
+                        <ButtonApperance className="ml-auto lg:ml-0" />
+                        <button
+                            onClick={() => setOpen(!open)}
+                            className="z-10 rounded-full p-3 transition-colors duration-200 hover:bg-black/10 lg:hidden"
+                        >
+                            <ComponentIcon icon={open ? X : Menu} size={open ? 25 : 18} />
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <style>{`@keyframes header-scroll-light{100%{box-shadow:0 5px 10px rgba(0,0,0,0.2);background-color:rgba(0,0,0,0.8);backdrop-filter:blur(5px)}}`}</style>
+        </>
     );
 }
 
 function NavOption({ href, label }) {
     return (
-        <li>
+        <li className="font-semibold">
             <Link href={href}>{label}</Link>
         </li>
     );
@@ -48,11 +78,11 @@ function SocialOption({ href, icon }) {
     );
 }
 
-function ButtonApperance() {
+function ButtonApperance({ className = '' }) {
     const { appearance, updateAppearance } = useAppearance();
     return (
         <button
-            className="rounded-full p-3 transition-colors duration-200 hover:bg-black/10"
+            className={cn('rounded-full p-3 transition-colors duration-200 hover:bg-black/10', className)}
             onClick={() => {
                 if (appearance === 'light') {
                     updateAppearance('dark');

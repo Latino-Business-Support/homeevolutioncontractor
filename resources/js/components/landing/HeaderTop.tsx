@@ -5,38 +5,36 @@ import Button from './Button';
 
 export default function HeaderTop() {
     const { info } = usePage().props as unknown as { info: InfoT };
-    console.log(info);
 
     return (
-        <div className="px-5 py-1">
-            <div className="container flex justify-between">
-                <img src={info.logo} alt={'Logo of ' + info.name} className="max-w-24" />
-                <div className="flex gap-5">
-                    <Item title="Call us any time" subtitle={info.phone} icon={Phone} />
-                    <Item title="Company Location" subtitle={info.address} icon={MapPin} />
-                    <Item title="Your Email " subtitle={info.email} icon={Mail} />
+        <div className="hidden px-5 py-3 sm:block">
+            <div className="container mx-auto flex justify-between">
+                <img src={info.logo} alt={'Logo of ' + info.name} className="hidden h-13 lg:block" />
+                <div className="flex flex-1 items-center gap-5 lg:justify-center">
+                    <Item title="Call us any time" subtitle={info.phone} icon={Phone} href="#" />
+                    <Item title="Company Location" subtitle={info.address} icon={MapPin} href="#" />
+                    <Item title="Your Email " subtitle={info.email} icon={Mail} href="#" />
                 </div>
-                <div className="flex gap-2">
-                    <Button label="GET A QUOTE" icon={ArrowUpRight} />
-                    {/* <div className="flex">
-                        <Button icon={Search} className="border-none bg-transparent px-4 text-blue-950" />
-                        <Button icon={Logs} className="border-none bg-transparent px-4 text-blue-950" />
-                    </div> */}
-                </div>
+                <Button className="py-2" label="GET A QUOTE" icon={ArrowUpRight} />
             </div>
         </div>
     );
 }
 
-function Item({ title, subtitle, icon = null }) {
+function Item({ title, subtitle, icon = null, href = '' }) {
     const Icon = icon;
     return (
-        <div className="flex items-center gap-5">
-            <Icon className="h-8 w-8 rounded-full bg-gray-200 p-2 text-xs text-blue-950" />
-            <div className="flex flex-col">
-                <span className="text-sm opacity-50">{title}</span>
-                <span className="text-sm font-bold">{subtitle}</span>
+        <a
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="border-c1 flex aspect-square h-8 items-center justify-center gap-5 rounded-full border lg:aspect-auto lg:border-0"
+        >
+            <Icon size={18} className="text-c1" />
+            <div className="hidden lg:grid">
+                <span className="truncate text-sm opacity-80">{title}</span>
+                <span className="truncate text-sm font-semibold">{subtitle}</span>
             </div>
-        </div>
+        </a>
     );
 }

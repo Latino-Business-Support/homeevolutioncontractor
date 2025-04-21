@@ -24,18 +24,19 @@ export default function Button({
     return (
         <Component
             className={cn(
-                'm-auto flex items-center gap-2 border bg-blue-950 px-8 py-4 font-semibold text-white transition-all duration-300 hover:border-blue-950 hover:bg-transparent hover:text-blue-950 dark:hover:text-white',
+                'group/btn bg-c1 border-c1 flex items-center gap-1 border px-8 py-4 font-semibold text-nowrap text-white transition-all dark:hover:text-white',
                 {
                     'aspect-square justify-center p-0': !label && icon,
                     'items-center justify-center': !label,
-                    '': variant === 'primary',
+                    'hover:text-c1 hover:bg-transparent': variant === 'primary',
+                    'hover:bg-c1 hover:border-c1 border-white bg-transparent': variant === 'secondary',
                 },
                 className,
             )}
             {...props}
         >
             {label ? label : ''}
-            {Icon && <Icon size={15} className={cn('', classIcon)} />}
+            {Icon && <Icon size={18} className={cn('transition-all duration-300 group-hover/btn:translate-x-2', classIcon)} />}
             {children}
         </Component>
     );
