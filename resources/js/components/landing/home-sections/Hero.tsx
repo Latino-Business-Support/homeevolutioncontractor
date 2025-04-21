@@ -39,7 +39,7 @@ export default function Hero({ className = '', id = '', isVisible }) {
     const handleDotClick = (index: number) => setCurrentSlideIndex(index);
 
     return (
-        <section className={cn('relative w-full overflow-hidden px-5 py-20 pb-30', className)} id={id}>
+        <section className={cn('relative h-[calc(100dvh-148px)] w-full overflow-hidden px-5 py-20 pb-30', className)} id={id}>
             <div className="absolute inset-0 z-0 transition-opacity duration-1000">
                 {slides.map((slide, index) => (
                     <img
@@ -54,13 +54,13 @@ export default function Hero({ className = '', id = '', isVisible }) {
                 ))}
             </div>
             <div
-                className={cn('relative z-2 container mx-auto flex items-center gap-10 transition-all duration-1000', {
+                className={cn('relative z-2 container mx-auto flex h-full items-center gap-10 transition-all', {
                     'translate-y-10 opacity-0': !isVisible,
                     'translate-y-0 opacity-100': isVisible,
                 })}
             >
                 {/* Content Container */}
-                <div className="flex h-full flex-1 flex-col text-white">
+                <div className="flex h-full flex-1 flex-col justify-center text-white">
                     <Title
                         size="xl"
                         titleIcon={Monitor}
@@ -91,7 +91,9 @@ export default function Hero({ className = '', id = '', isVisible }) {
                     <button
                         key={index}
                         onClick={() => handleDotClick(index)}
-                        className={`h-3 w-3 rounded-full transition-all ${index === currentSlideIndex ? 'scale-125 bg-white' : 'bg-white/50'}`}
+                        className={cn('h-3 w-3 rounded-full bg-white/50 transition-all', {
+                            'scale-125 bg-white': index === currentSlideIndex,
+                        })}
                         aria-label={`Go to slide ${index + 1}`}
                     />
                 ))}

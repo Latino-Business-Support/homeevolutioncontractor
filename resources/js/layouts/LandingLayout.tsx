@@ -1,11 +1,14 @@
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import HeaderTop from '@/components/landing/HeaderTop';
-import { Head } from '@inertiajs/react';
+import type { InfoT } from '@/types';
+import { Head, usePage } from '@inertiajs/react';
 
 export default function LandingLayout({ title = '', children }) {
+    const { info } = usePage().props as unknown as { info: InfoT };
     return (
         <>
+            <link rel="shortcut icon" href={info.favicon} type="image/x-icon" />
             <Head title={title} />
             <HeaderTop />
             <Header />
