@@ -40,7 +40,10 @@ export default function Hero({ className = '', id = '', isVisible }) {
 
     return (
         <section
-            className={cn('relative h-[calc(100dvh-72px)] w-full overflow-hidden px-5 py-20 pb-30 sm:h-[calc(100dvh-148px)]', className)}
+            className={cn(
+                'relative h-[calc(100dvh-72px)] w-full overflow-hidden px-5 py-20 pb-30 sm:h-[calc(100dvh-138px)] lg:h-[calc(100dvh-148px)]',
+                className,
+            )}
             id={id}
         >
             <div className="absolute inset-0 z-0 transition-opacity duration-1000">
@@ -75,15 +78,27 @@ export default function Hero({ className = '', id = '', isVisible }) {
                     />
 
                     <div className="mt-15 flex flex-col justify-start gap-4 sm:flex-row">
-                        <Button as={Link} href={slides[currentSlideIndex].link} label="Explore More" icon={ArrowUpRight} />
-                        <Button as={Link} href={route('contact')} label="Contact Us" icon={ArrowUpRight} variant="secondary" />
+                        <Button
+                            className="h-10 justify-center sm:h-14"
+                            as={Link}
+                            href={slides[currentSlideIndex].link}
+                            label="Explore More"
+                            icon={ArrowUpRight}
+                        />
+                        <Button
+                            className="h-10 justify-center sm:h-14"
+                            as={Link}
+                            href={route('contact')}
+                            label="Contact Us"
+                            icon={ArrowUpRight}
+                            variant="secondary"
+                        />
                     </div>
                 </div>
                 {/* Quote Form */}
                 <div className="hidden max-w-md flex-1 lg:block">
                     <div className="bg-c3/50 flex w-full flex-col rounded-lg p-6 text-white shadow-lg backdrop-blur-sm">
                         <h2 className="pb-6 text-2xl font-bold">Feel Free to Contact Us</h2>
-
                         <Form />
                     </div>
                 </div>
