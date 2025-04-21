@@ -4,7 +4,7 @@ import { Info } from 'lucide-react';
 
 export default function About({ className = '', id = '', isVisible }) {
     return (
-        <section className={cn('mt-10 overflow-hidden px-5 py-20', className)} id={id}>
+        <section className={cn('overflow-hidden px-5 py-20', className)} id={id}>
             <div className="container mx-auto flex flex-col justify-between gap-10 md:flex-row">
                 <div
                     className={cn('transitin-all flex flex-1 items-center duration-1000', {

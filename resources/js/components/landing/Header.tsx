@@ -26,10 +26,10 @@ export default function Header() {
                             <ul className={cn('flex flex-col items-start gap-5', 'lg:flex-row lg:items-center')}>
                                 <img className="w-full lg:hidden" src={info.logo} alt={'Logo of ' + info.name} />
                                 <NavOption href={route('home')} label="Home" />
-                                <NavOption href={route('home')} label="About" />
-                                <NavOption href={route('home')} label="Services" />
-                                <NavOption href={route('home')} label="Projects" />
-                                <NavOption href={route('home')} label="Contact" />
+                                <NavOption href={route('about')} label="About" />
+                                <NavOption href={route('services')} label="Services" />
+                                <NavOption href={route('projects')} label="Projects" />
+                                <NavOption href={route('contact')} label="Contact" />
                             </ul>
                             <ul className="flex items-center gap-5">
                                 <span className="hidden lg:inline">Social Media:</span>
@@ -43,7 +43,6 @@ export default function Header() {
                             className={cn('fixed inset-0 bg-white/10 backdrop-blur-sm lg:hidden dark:bg-black/10', { hidden: !open })}
                             onClick={() => setOpen(false)}
                         />
-
                         <ButtonApperance className="ml-auto lg:ml-0" />
                         <button
                             onClick={() => setOpen(!open)}
@@ -60,8 +59,12 @@ export default function Header() {
 }
 
 function NavOption({ href, label }) {
+    const path1 = new URL(href).pathname;
+    const path2 = new URL(window.location.href).pathname;
+    const isActive = path1 === path2;
+
     return (
-        <li className="font-semibold">
+        <li className={cn('durations-300 hover:text-c1 font-semibold transition-colors', { 'text-c1': isActive })}>
             <Link href={href}>{label}</Link>
         </li>
     );
