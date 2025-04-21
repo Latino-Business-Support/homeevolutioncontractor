@@ -39,7 +39,10 @@ export default function Hero({ className = '', id = '', isVisible }) {
     const handleDotClick = (index: number) => setCurrentSlideIndex(index);
 
     return (
-        <section className={cn('relative h-[calc(100dvh-148px)] w-full overflow-hidden px-5 py-20 pb-30', className)} id={id}>
+        <section
+            className={cn('relative h-[calc(100dvh-72px)] w-full overflow-hidden px-5 py-20 pb-30 sm:h-[calc(100dvh-148px)]', className)}
+            id={id}
+        >
             <div className="absolute inset-0 z-0 transition-opacity duration-1000">
                 {slides.map((slide, index) => (
                     <img
