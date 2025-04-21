@@ -4,7 +4,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - master
 env:
   APP_DOMAIN: 'homeevolutioncontractor.ideasoft.site'
   SERVER_DIR: '/public_html/homeevolutioncontractor.ideasoft.site'
