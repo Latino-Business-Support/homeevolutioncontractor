@@ -74,7 +74,7 @@ export default function Hero({ className = '', id = '', isVisible }) {
                         invert={true}
                     />
 
-                    <div className="mt-15 flex justify-start gap-4">
+                    <div className="mt-15 flex flex-col justify-start gap-4 sm:flex-row">
                         <Button as={Link} href={slides[currentSlideIndex].link} label="Explore More" icon={ArrowUpRight} />
                         <Button as={Link} href={route('contact')} label="Contact Us" icon={ArrowUpRight} variant="secondary" />
                     </div>
