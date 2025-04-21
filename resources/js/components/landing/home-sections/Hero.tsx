@@ -1,11 +1,11 @@
 import Button from '@/components/landing/Button';
 import Title from '@/components/landing/Title';
 import { asset, cn } from '@/lib/utils';
+import Form from '@/pages/landing/Form';
 import type { InfoT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { ArrowUpRight, Monitor } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import Form from '../Form';
 
 const slides = [
     {
