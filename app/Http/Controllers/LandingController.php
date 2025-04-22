@@ -23,7 +23,6 @@ class LandingController extends Controller
 
     public function services()
     {
-        $services = Service::all();
         return inertia('landing/Services');
     }
 
