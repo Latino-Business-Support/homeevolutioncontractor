@@ -17,7 +17,6 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->encryptCookies(except: ['appearance', 'sidebar_state']);
-
         $middleware->web(append: [
             HandleAppearance::class,
             HandleInertiaRequests::class,
@@ -27,7 +26,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
             if (!app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [500, 503, 404, 403])) {
-                // $page = str_contains($request->getRequestUri(), '/dashboard') ? 'dashboard/ErrorPage' : 'landing/ErrorPage';
                 $page = 'Error';
                 return inertia($page, ['status' => $response->getStatusCode()])
                     ->toResponse($request)
@@ -35,7 +33,6 @@ return Application::configure(basePath: dirname(__DIR__))
             } elseif ($response->getStatusCode() === 419) {
                 return back()->with(['message' => 'Session expired. Please try again.']);
             }
-
             return $response;
         });
     })->create();

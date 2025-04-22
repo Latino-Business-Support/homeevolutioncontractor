@@ -25,7 +25,7 @@ export default function Services() {
                     />
                     <div className="mt-20 grid grid-cols-1 gap-5 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
                         {services.map((service, index) => (
-                            <SingleService key={index} service={service} />
+                            <SingleService key={index} service={service} variant="secondary" />
                         ))}
                     </div>
                 </div>
