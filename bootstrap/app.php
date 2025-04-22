@@ -3,6 +3,7 @@
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Models\Service;
+use App\Models\Social;
 use App\Services\InfoFormatService;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -32,7 +33,8 @@ return Application::configure(basePath: dirname(__DIR__))
                 $status = $response->getStatusCode();
                 [$infos, $info] = InfoFormatService::format();
                 $services = Service::all();
-                return inertia($page, compact('status', 'infos', 'info', 'services'))
+                $socials = Social::all();
+                return inertia($page, compact('status', 'infos', 'info', 'services', 'socials'))
                     ->toResponse($request)
                     ->setStatusCode($response->getStatusCode());
             } elseif ($response->getStatusCode() === 419) return back()->with(['message' => 'Session expired. Please try again.']);
