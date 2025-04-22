@@ -18,7 +18,7 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                     alt={'Service of ' + service.name}
                     className={cn('w-full object-cover transition-all duration-300 group-hover:scale-125', {
                         'aspect-square': variant === 'primary',
-                        'aspect-video': variant === 'secondary',
+                        'aspect-video h-full max-h-56': variant === 'secondary',
                     })}
                 />
             </div>
@@ -26,7 +26,7 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                 {service.name}
             </Link>
             {variant === 'secondary' && (
-                <div className="justify flex h-full max-h-52 flex-col">
+                <div className="flex flex-col justify-between">
                     <p className="text-gray-600">{service.description}</p>
                     <Button label="View Details" icon={ArrowRight} />
                 </div>
