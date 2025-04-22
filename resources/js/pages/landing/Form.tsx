@@ -1,37 +1,64 @@
 import Button from '@/components/landing/Button';
+import useCrud from '@/hooks/dashboard/useCrud';
 import { cn } from '@/lib/utils';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, LoaderCircle } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import { createPortal } from 'react-dom';
+import { toast } from 'react-toastify';
 
 export default function Form({ className = '', invert = false }) {
+    const { addField, processing, handleSubmit } = useCrud({ resource: 'crud-mails', prefix: '' });
+    const [showModal, setShowModal] = useState(false);
     return (
-        <form
-            className={cn(
-                'grid gap-6 text-black sm:grid-cols-2 dark:text-white',
-                {
-                    'text-white': invert,
-                },
-                className,
-            )}
-        >
-            <Input placeholder="FullName *" label="FullName" invert={invert} />
-            <Input placeholder="Email *" label="Email" invert={invert} />
-            <Input placeholder="Phone *" label="Phone" invert={invert} />
-            <Input placeholder="Address *" label="Address" invert={invert} />
-            <Input placeholder="Message *" label="Message" as="textarea" className="sm:col-span-2" invert={invert} />
+        <>
+            <form
+                className={cn(
+                    'grid gap-6 text-black sm:grid-cols-2 dark:text-white',
+                    {
+                        'text-white': invert,
+                    },
+                    className,
+                )}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    setShowModal(true);
+                }}
+            >
+                <Input {...addField('name', 'FullName *')} invert={invert} />
+                <Input {...addField('email', 'Email *')} invert={invert} type="email" />
+                <Input {...addField('phone', 'Phone *')} invert={invert} type="tel" />
+                <Input {...addField('address', 'Address *')} invert={invert} />
+                <Input {...addField('message', 'Message *')} invert={invert} as="textarea" className="sm:col-span-2" />
 
-            <Button label="Send Message" icon={ArrowRight} className="w-full justify-center sm:col-span-2" />
-        </form>
+                <Button label="Send Message" icon={ArrowRight} className="w-full justify-center sm:col-span-2" disabled={processing} />
+            </form>
+            {showModal &&
+                createPortal(
+                    <ModalFormConfirm handleSubmit={handleSubmit} show={showModal} close={() => setShowModal(false)} isLoading={processing} />,
+                    document.body,
+                )}
+        </>
     );
 }
 
 function Input({
-    as = 'input',
-    className = '',
-    label,
+    type = 'text',
+    label = '',
     error = '',
+    onChange = null,
+    className = '',
     invert = false,
+    as = 'input',
     ...props
-}: { as?: React.ElementType; label: string; error?: string; invert: boolean } & React.InputHTMLAttributes<HTMLInputElement>) {
+}: {
+    type?: string;
+    label?: string;
+    error: string;
+    onChange: (value: string) => void;
+    className?: string;
+    invert?: boolean;
+    as?: 'input' | 'textarea';
+}) {
     const Component = as;
     return (
         <label htmlFor="name" className={cn('', className)}>
@@ -42,6 +69,9 @@ function Input({
                         { 'field-sizing-content min-h-20 resize-none': as === 'textarea' },
                         { 'border-c1/20': invert },
                     )}
+                    type={type}
+                    autoComplete="off"
+                    onChange={(e) => onChange?.(e.target.value)}
                     {...props}
                 />
                 <span className="peer-focus:text-c1 pointer-events-none absolute top-2 left-4 text-xs font-medium transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-400 peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-xs dark:text-zinc-400">
@@ -52,5 +82,52 @@ function Input({
                 <span className="h-5 truncate pl-2 text-sm text-nowrap text-red-500 dark:text-red-400">{error}</span>
             </div>
         </label>
+    );
+}
+
+export function ModalFormConfirm({ handleSubmit, show = true, close = null, isLoading = false, className = '' }) {
+    const num1 = useMemo(() => Math.floor(Math.random() * 10) + 1, []);
+    const num2 = useMemo(() => Math.floor(Math.random() * 10) + 1, []);
+    const result = useMemo(() => num1 + num2, [num1, num2]);
+    const options = useMemo(() => [result, result + 1, result - 1, result + 2], [result]);
+    const shuffledOptions = useMemo(() => options.sort(() => Math.random() - 0.5), [options]);
+
+    const handleClick = (option) => {
+        if (option === result) {
+            handleSubmit();
+            close();
+        } else toast.error('Incorrect answer. Please try again.');
+    };
+
+    useEffect(() => {
+        if (show) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = '';
+        return () => {
+            document.body.style.overflow = '';
+        };
+    }, [show]);
+
+    if (!show) return null;
+    return (
+        <div className={cn('relative z-20', className)}>
+            <div className="fixed inset-0 cursor-pointer bg-black/40 backdrop-blur-md" onClick={close} />
+            <div className="dark:bg-c3 fixed top-1/2 left-1/2 z-[1] w-full max-w-md -translate-1/2 rounded-lg bg-white px-5 py-10 text-black shadow-lg dark:text-white">
+                <h2 className="mb-4 text-center text-xl font-semibold">Resuelve la siguiente operación para confirmar tu solicitud</h2>
+                <p className="mb-4 text-center">
+                    ¿Cuánto es {num1} + {num2}?
+                </p>
+                <div className="mx-auto flex justify-center gap-4">
+                    {shuffledOptions.map((option, index) => (
+                        <Button
+                            key={index}
+                            label={!isLoading ? String(option) : ''}
+                            classIcon="animate-spin"
+                            icon={isLoading ? LoaderCircle : null}
+                            onClick={() => handleClick(option)}
+                        />
+                    ))}
+                </div>
+            </div>
+        </div>
     );
 }

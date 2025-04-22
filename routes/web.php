@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\MailController;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,9 @@ Route::get('/services/{slug}', [LandingController::class, 'service'])->name('ser
 Route::get('/projects', [LandingController::class, 'projects'])->name('projects');
 Route::get('/faqs', [LandingController::class, 'faqs'])->name('faqs');
 Route::get('/contact', [LandingController::class, 'contact'])->name('contact');
+
+// public services
+Route::post('/crud-mails', [MailController::class, 'store'])->name('crud-mails.store');
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->name('home');

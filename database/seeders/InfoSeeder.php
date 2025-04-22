@@ -15,6 +15,8 @@ class InfoSeeder extends Seeder
         DB::table('infos')->insert([
             ['label' => 'Google Place Api Key', 'field' => 'google_api_key', 'value' => env('GOOGLE_API_KEY', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
             ['label' => 'Google Place ID', 'field' => 'google_place_id', 'value' => env('GOOGLE_PLACE_ID', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
+            ['label' => 'Email User', 'field' => 'email_user', 'value' => env('MAIL_USERNAME', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
+            ['label' => 'Email Pass', 'field' => 'email_pass', 'value' => env('MAIL_PASSWORD', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
         ]);
 
         // images
@@ -31,10 +33,6 @@ class InfoSeeder extends Seeder
             ['label' => 'Address', 'field' => 'address', 'value' => "618 N Lowell Ave, Syracuse, NY 13204"],
             ['label' => 'Google Place', 'field' => 'google_place', 'value' => "https://maps.app.goo.gl/nekwfwm4kGWQt2q89"],
             ['label' => 'Facebook', 'field' => 'facebook', 'value' => "https://www.facebook.com/#"],
-            // ['label' => 'Email User', 'field' => 'email_user', 'value' => env('MAIL_USERNAME', '')],
-            // ['label' => 'Email Pass', 'field' => 'email_pass', 'value' => env('MAIL_PASSWORD', '')],
-            // ['label' => 'Google Place Api Key', 'field' => 'google_api_key', 'value' => env('GOOGLE_API_KEY', '')],
-            // ['label' => 'Google Place ID', 'field' => 'google_place_id', 'value' => env('GOOGLE_PLACE_ID', '')],
         ]);
 
         // textareas

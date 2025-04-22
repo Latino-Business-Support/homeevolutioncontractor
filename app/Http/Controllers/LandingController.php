@@ -38,9 +38,9 @@ class LandingController extends Controller
 
     public function service($slug)
     {
+        $service = Service::where('slug', $slug)->firstOrFail();
         $socials = Social::all();
         $services = Service::all();
-        $service = Service::where('slug', $slug)->firstOrFail();
         return inertia('landing/Service', compact('services', 'service', 'socials'));
     }
 

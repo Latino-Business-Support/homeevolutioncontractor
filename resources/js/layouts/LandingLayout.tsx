@@ -4,6 +4,7 @@ import Header from '@/components/landing/Header';
 import HeaderTop from '@/components/landing/HeaderTop';
 import type { InfoT } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
+import { ToastContainer } from 'react-toastify';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
@@ -27,6 +28,7 @@ export default function LandingLayout({ title = '', paths = undefined, children 
                 </div>
                 <div className="pointer-events-none fixed inset-0 bg-white/5 backdrop-blur-[2px] dark:bg-black/5" />
             </div>
+            <ToastContainer />
         </>
     );
 }

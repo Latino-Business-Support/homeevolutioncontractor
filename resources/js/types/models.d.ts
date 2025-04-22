@@ -37,6 +37,7 @@ export type ServiceT = {
     image: string;
     image_url: string;
     description: string;
+    page: string;
     faqs: ServiceFaqT[];
 };
 
