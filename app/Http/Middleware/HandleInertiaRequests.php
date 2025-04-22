@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Service;
 use App\Services\InfoFormatService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
@@ -23,7 +22,6 @@ class HandleInertiaRequests extends Middleware
         [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
 
         [$infos, $info] = InfoFormatService::format();
-        $services = Service::all();
 
         return [
             ...parent::share($request),
@@ -38,7 +36,6 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
             'info' => $info,
-            'services' => $services,
         ];
     }
 }

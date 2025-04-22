@@ -9,7 +9,7 @@ export default function SingleService({ service, variant = 'primary' }: { servic
         <div
             className={cn('group flex h-full flex-col gap-5 transition-all duration-300', {
                 '': variant === 'primary',
-                '': variant === 'secondary',
+                'bg-c2/10': variant === 'secondary',
             })}
         >
             <div className="overflow-hidden">
@@ -22,11 +22,14 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                     })}
                 />
             </div>
-            <Link href={route('service', service.slug)} className="hover:text-c1 font-c2 text-3xl font-bold">
+            <Link
+                href={route('service', service.slug)}
+                className={cn('hover:text-c1 font-c2 text-3xl font-bold', { '': variant === 'primary', 'px-3': variant === 'secondary' })}
+            >
                 {service.name}
             </Link>
             {variant === 'secondary' && (
-                <div className="flex flex-1 flex-col justify-between gap-5">
+                <div className="flex flex-1 flex-col justify-between gap-5 px-3 pb-3">
                     <p className="text-gray-600">{service.description}</p>
                     <div className="mt-auto">
                         <Button label="View Details" icon={ArrowRight} />
