@@ -8,6 +8,7 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import SingleService from '../SingleService';
 
 export default function Services({ className = '', id = '', isVisible }) {
     const { services } = usePage().props as unknown as { services: ServiceT[] };
@@ -53,22 +54,5 @@ export default function Services({ className = '', id = '', isVisible }) {
                 <Button className="mx-auto mt-12" label="See All Services" as={Link} href={route('services')} />
             </div>
         </section>
-    );
-}
-
-function SingleService({ service }: { service: ServiceT }) {
-    return (
-        <div className="group flex flex-col gap-5 transition-all duration-300">
-            <div className="overflow-hidden">
-                <img
-                    src={service.image_url}
-                    alt={'Service of ' + service.name}
-                    className="aspect-square object-cover transition-all duration-300 group-hover:scale-125"
-                />
-            </div>
-            <Link href={route('service', service.slug)} className="hover:text-c1 font-c2 text-3xl font-bold">
-                {service.name}
-            </Link>
-        </div>
     );
 }

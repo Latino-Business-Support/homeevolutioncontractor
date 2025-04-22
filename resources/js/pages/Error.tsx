@@ -1,8 +1,7 @@
 import Button from '@/components/landing/Button';
 import LandingLayout from '@/layouts/LandingLayout';
-import { asset } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
-import { ArrowRight, Home } from 'lucide-react';
+import { Home } from 'lucide-react';
 
 export default function Error({ status }) {
     const title = {
@@ -19,39 +18,22 @@ export default function Error({ status }) {
     }[status];
 
     return (
-        <LandingLayout
-            title={title}
-            // paths={[
-            //     { name: 'Home', href: route('home') },
-            //     { name: title, href: '#' },
-            // ]}
-        >
+        <LandingLayout title={title}>
             <section className="px-5 py-10">
                 <div className="container mx-auto flex flex-col items-center justify-center text-center">
                     <div className="glass-card border-c1/5 mx-auto max-w-3xl rounded-2xl dark:border-white/5">
-                        <h1 className="font-poppins from-c1 to-c1/70 mx-auto mb-4 inline bg-gradient-to-r bg-clip-text text-9xl font-bold text-transparent">
-                            {status}
-                        </h1>
-                        <h2 className="font-poppins text-3xl font-bold md:text-4xl">{title}</h2>
-
                         <div className="relative mx-auto h-64 w-64">
+                            <h1 className="font-poppins from-c1 to-c1/70 mx-auto mb-4 inline bg-gradient-to-r bg-clip-text text-9xl font-bold text-transparent">
+                                {status}
+                            </h1>
+                            <h2 className="font-poppins text-3xl font-bold md:text-4xl">{title}</h2>
                             <div className="bg-c1/50 dark:bg-c1/20 absolute inset-0 animate-pulse rounded-full opacity-30 blur-3xl duration-[3s]" />
-                            <div className="relative z-10">
-                                <img
-                                    src={asset('img/info/pet5.webp')}
-                                    alt="Ideasoft Mascota"
-                                    width={250}
-                                    height={250}
-                                    className="h-auto w-auto rotate-20"
-                                />
-                            </div>
                         </div>
 
                         <p className="text-foreground/80 mx-auto mb-8 max-w-lg text-xl">{description}</p>
 
                         <div className="flex flex-wrap justify-center gap-4">
-                            <Button as={Link} href={route('home')} icon={Home} label="Volver al inicio" />
-                            <Button as={Link} href={route('contact')} variant="secondary" icon={ArrowRight} label="Contactar soporte" />
+                            <Button as={Link} href={route('home')} icon={Home} label="Back to Home" />
                         </div>
                     </div>
                 </div>

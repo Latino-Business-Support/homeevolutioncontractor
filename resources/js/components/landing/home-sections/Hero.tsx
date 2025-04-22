@@ -1,41 +1,22 @@
 import Button from '@/components/landing/Button';
 import Title from '@/components/landing/Title';
-import { asset, cn } from '@/lib/utils';
+import { cn } from '@/lib/utils';
 import Form from '@/pages/landing/Form';
-import type { InfoT } from '@/types';
+import type { InfoT, SlideT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { ArrowUpRight, Monitor } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-const slides = [
-    {
-        image: asset('img/slides/1.webp'),
-        title: 'Building Trust, One {Roof at a Time}. Syracuse’s Go-To Contractor',
-        description: 'This involves exploration and production (E&P) of oil and natural gas.',
-        link: route('services'),
-    },
-    {
-        image: asset('img/slides/2.webp'),
-        title: 'Quality {Roofing Solutions} for Every Home',
-        description: 'This involves exploration and production (E&P) of oil and natural gas.',
-        link: route('services'),
-    },
-    {
-        image: asset('img/slides/3.webp'),
-        title: 'Your Trusted Partner in {Home Renovations}',
-        description: 'This involves exploration and production (E&P) of oil and natural gas.',
-        link: route('services'),
-    },
-];
 export default function Hero({ className = '', id = '', isVisible }) {
-    const { info } = usePage().props as unknown as { info: InfoT };
+    const { info, slides } = usePage().props as unknown as { info: InfoT; slides: SlideT[] };
+
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
         }, 5000); // Change slide every 5 seconds
         return () => clearInterval(interval);
-    }, []);
+    }, [slides.length]);
     const handleDotClick = (index: number) => setCurrentSlideIndex(index);
 
     return (
@@ -50,7 +31,7 @@ export default function Hero({ className = '', id = '', isVisible }) {
                 {slides.map((slide, index) => (
                     <img
                         key={index}
-                        src={slide.image}
+                        src={slide.image_url}
                         alt={slide.title}
                         className={cn(
                             'absolute inset-0 h-full w-full object-cover opacity-0 brightness-75 transition-opacity duration-500 dark:[mask-image:linear-gradient(transparent,black,transparent)]',

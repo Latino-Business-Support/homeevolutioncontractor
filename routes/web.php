@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LandingController;
+use App\Models\Service;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Response;
 
@@ -12,8 +14,8 @@ Route::get('/storage/{any}', function ($any) {
 })->where('any', '.*');
 
 Route::get('/', [LandingController::class, 'home'])->name('home');
-Route::get('/about', [LandingController::class, 'home'])->name('about');
-Route::get('/services', [LandingController::class, 'home'])->name('services');
+Route::get('/about', [LandingController::class, 'about'])->name('about');
+Route::get('/services', [LandingController::class, 'services'])->name('services');
 Route::get('/services/{slug}', [LandingController::class, 'home'])->name('service');
 Route::get('/projects', [LandingController::class, 'home'])->name('projects');
 Route::get('/faqs', [LandingController::class, 'home'])->name('faqs');

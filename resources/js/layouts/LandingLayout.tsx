@@ -1,10 +1,11 @@
+import Breadcrumbs from '@/components/landing/Breadcrumbs';
 import Footer from '@/components/landing/Footer';
 import Header from '@/components/landing/Header';
 import HeaderTop from '@/components/landing/HeaderTop';
 import type { InfoT } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 
-export default function LandingLayout({ title = '', children }) {
+export default function LandingLayout({ title = '', paths = undefined, children }) {
     const { info } = usePage().props as unknown as { info: InfoT };
     return (
         <>
@@ -12,6 +13,7 @@ export default function LandingLayout({ title = '', children }) {
             <Head title={title} />
             <HeaderTop />
             <Header />
+            {paths && <Breadcrumbs title={title} paths={paths} />}
             <div>{children}</div>
             <Footer />
             <div className="fixed inset-0 -z-10 w-full overflow-hidden opacity-0 transition-colors duration-500 dark:bg-slate-950 dark:text-white dark:opacity-100">

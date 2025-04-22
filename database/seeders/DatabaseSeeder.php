@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             InfoSeeder::class,
             ServiceSeeder::class,
             ProjectSeeder::class,
+            SlideSeeder::class,
         ]);
     }
 }

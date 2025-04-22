@@ -36,3 +36,12 @@ export type ProjectT = {
     image: string;
     image_url: string;
 };
+
+export type SlideT = {
+    id: number;
+    title: string;
+    description: string;
+    image: string;
+    image_url: string;
+    link: string;
+};

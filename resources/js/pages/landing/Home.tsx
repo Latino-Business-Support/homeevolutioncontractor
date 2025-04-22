@@ -1,10 +1,10 @@
-import About from '@/components/landing/home-sections/About';
 import Hero from '@/components/landing/home-sections/Hero';
-import { Philosophy } from '@/components/landing/home-sections/Philosophy';
 import Projects from '@/components/landing/home-sections/Projects';
 import Services from '@/components/landing/home-sections/Services';
+import About from '@/components/landing/sections/About';
 import Contact from '@/components/landing/sections/Contact';
 import { Counters } from '@/components/landing/sections/Counters';
+import { Philosophy } from '@/components/landing/sections/Philosophy';
 import useSectionsIntersection from '@/hooks/landing/use-sections-intersection';
 import LandingLayout from '@/layouts/LandingLayout';
 
