@@ -24,5 +24,13 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        // Removemos la lógica personalizada de aquí, ya que ahora está en el Handler.php
+        $exceptions->respond(function (Response $response, Throwable $exception, Request $request) {
+            if (!app()->environment(['local', 'testing']) && in_array($response->getStatusCode(), [500, 503, 404, 403])) {
+                $page = 'Error';
+                return inertia($page, ['status' => $response->getStatusCode()])
+                    ->toResponse($request)
+                    ->setStatusCode($response->getStatusCode());
+            } elseif ($response->getStatusCode() === 419) return back()->with(['message' => 'Session expired. Please try again.']);
+            return $response;
+        });
     })->create();

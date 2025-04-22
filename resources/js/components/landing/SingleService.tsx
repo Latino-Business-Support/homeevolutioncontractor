@@ -16,9 +16,9 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                 <img
                     src={service.image_url}
                     alt={'Service of ' + service.name}
-                    className={cn('w-full object-cover transition-all duration-300 group-hover:scale-125', {
+                    className={cn('object- w-full transition-all duration-300 group-hover:scale-125', {
                         'aspect-square': variant === 'primary',
-                        'aspect-video h-full max-h-56': variant === 'secondary',
+                        'aspect-video': variant === 'secondary',
                     })}
                 />
             </div>
