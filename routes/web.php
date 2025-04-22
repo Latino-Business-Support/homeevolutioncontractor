@@ -16,7 +16,7 @@ Route::get('/about', [LandingController::class, 'home'])->name('about');
 Route::get('/services', [LandingController::class, 'home'])->name('services');
 Route::get('/services/{slug}', [LandingController::class, 'home'])->name('service');
 Route::get('/projects', [LandingController::class, 'home'])->name('projects');
-Route::get('/projects', [LandingController::class, 'home'])->name('projects');
+Route::get('/faqs', [LandingController::class, 'home'])->name('faqs');
 Route::get('/contact', [LandingController::class, 'home'])->name('contact');
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')->group(function () {

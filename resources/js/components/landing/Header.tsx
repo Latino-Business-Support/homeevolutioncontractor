@@ -29,6 +29,7 @@ export default function Header() {
                                 <NavOption href={route('about')} label="About" />
                                 <NavOption href={route('services')} label="Services" />
                                 <NavOption href={route('projects')} label="Projects" />
+                                <NavOption href={route('faqs')} label="Faq's" />
                                 <NavOption href={route('contact')} label="Contact" />
                             </ul>
                             <ul className="flex items-center gap-5">

@@ -38,7 +38,7 @@ export function Philosophy({ className = '', id = '', isVisible }) {
                 })}
             >
                 <div className="mb-10 text-center">
-                    <Title titleIcon={Target} title="Our Philosophy" subtitle="What {defines} us" />
+                    <Title titleIcon={Target} title="Our Philosophy" subtitle="What {Defines} Us" />
                 </div>
 
                 <Tabs defaultValue="mission" className="w-full">

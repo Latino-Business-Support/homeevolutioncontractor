@@ -25,7 +25,7 @@ export default function About({ className = '', id = '', isVisible }) {
                     <Title
                         titleIcon={Info}
                         title="About Us"
-                        subtitle="Your {trusted contractor} in Syracuse, NY and surrounding areas"
+                        subtitle="Your {Trusted Contractor} in Syracuse, NY and surrounding areas"
                         description="At Home Evolution Contractor, our mission is to empower homeowners to achieve their dream living spaces through exceptional craftsmanship and customer satisfaction. Founded on integrity, quality, and community, we deliver top-notch roofing, siding, and gutter services with a personal touch. Our experienced professionals bring expertise and dedication to every project, ensuring seamless execution and stunning results."
                         className="md:items-start md:text-left"
                     />

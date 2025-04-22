@@ -1,9 +1,9 @@
 import { asset } from '@/lib/utils';
-import type { InfoT } from '@/types';
+import type { InfoT, ServiceT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
 export default function Footer() {
-    const { info } = usePage().props as unknown as { info: InfoT };
+    const { info, services } = usePage().props as unknown as { info: InfoT; services: ServiceT[] };
     return (
         <footer className="bg-c3 relative px-5 py-15 text-white dark:bg-transparent">
             <img
@@ -26,21 +26,20 @@ export default function Footer() {
                     <div className="mx-auto flex flex-col gap-10">
                         <Title text="Quick links" />
                         <ul className="flex flex-col gap-3">
-                            <Item text="About Us" href="#" />
-                            <Item text="Our Services" href="#" />
-                            <Item text="Our Pricing" href="#" />
-                            <Item text="Our team" href="#" />
-                            <Item text="Contact Us" href="#" />
+                            <Item text="Home" href={route('home')} />
+                            <Item text="About Us" href={route('about')} />
+                            <Item text="Our Services" href={route('services')} />
+                            <Item text="Our Projects" href={route('projects')} />
+                            <Item text="Faq's" href={route('faqs')} />
+                            <Item text="Contact Us" href={route('contact')} />
                         </ul>
                     </div>
                     <div className="mx-auto flex flex-col gap-10">
                         <Title text="Services" />
                         <ul className="flex flex-col gap-3">
-                            <Item text="Building Renovation" href="#" />
-                            <Item text="General Contracting" href="#" />
-                            <Item text="Repair & Expand" href="#" />
-                            <Item text="Architecture Design" href="#" />
-                            <Item text="Building Contraction" href="#" />
+                            {services.map((service) => (
+                                <Item key={service.id} text={service.name} href={route('service', service.slug)} />
+                            ))}
                         </ul>
                     </div>
                     <div className="mx-auto flex flex-col gap-10">

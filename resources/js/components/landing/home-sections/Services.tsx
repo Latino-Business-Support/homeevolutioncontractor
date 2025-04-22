@@ -50,7 +50,7 @@ export default function Services({ className = '', id = '', isVisible }) {
                         ))}
                     </Swiper>
                 </div>
-                <Button className="mx-auto mt-12" label="See All Services" href={route('services')} />
+                <Button className="mx-auto mt-12" label="See All Services" as={Link} href={route('services')} />
             </div>
         </section>
     );

@@ -24,7 +24,7 @@ export default function Button({
     return (
         <Component
             className={cn(
-                'group/btn bg-c1 border-c1 flex items-center gap-1 border px-8 py-4 font-semibold text-nowrap text-white transition-all dark:hover:text-white',
+                'group/btn bg-c1 border-c1 flex w-fit items-center gap-1 border px-8 py-4 font-semibold text-nowrap text-white transition-all dark:hover:text-white',
                 {
                     'aspect-square justify-center p-0': !label && icon,
                     'items-center justify-center': !label,

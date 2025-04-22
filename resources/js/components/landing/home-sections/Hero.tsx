@@ -79,14 +79,14 @@ export default function Hero({ className = '', id = '', isVisible }) {
 
                     <div className="mt-15 flex flex-col justify-start gap-4 sm:flex-row">
                         <Button
-                            className="h-10 justify-center sm:h-14"
+                            className="h-10 w-full justify-center sm:h-14 sm:w-fit"
                             as={Link}
                             href={slides[currentSlideIndex].link}
                             label="Explore More"
                             icon={ArrowUpRight}
                         />
                         <Button
-                            className="h-10 justify-center sm:h-14"
+                            className="h-10 w-full justify-center sm:h-14 sm:w-fit"
                             as={Link}
                             href={route('contact')}
                             label="Contact Us"
@@ -97,9 +97,9 @@ export default function Hero({ className = '', id = '', isVisible }) {
                 </div>
                 {/* Quote Form */}
                 <div className="hidden max-w-md flex-1 lg:block">
-                    <div className="bg-c3/50 flex w-full flex-col rounded-lg p-6 text-white shadow-lg backdrop-blur-sm">
+                    <div className="bg-c3/50 border-c1/15 flex w-full flex-col rounded-lg border p-6 text-white shadow-lg backdrop-blur-lg">
                         <h2 className="pb-6 text-2xl font-bold">Feel Free to Contact Us</h2>
-                        <Form />
+                        <Form invert />
                     </div>
                 </div>
             </div>
