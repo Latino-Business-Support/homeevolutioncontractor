@@ -11,22 +11,20 @@ class LandingController extends Controller
 {
     public function home()
     {
-        $services = Service::all();
         $projects = Project::all();
         $slides = Slide::all();
-        return inertia('landing/Home', compact('services', 'projects', 'slides'));
+        return inertia('landing/Home', compact('projects', 'slides'));
     }
 
     public function about()
     {
-        $services = Service::all();
-        return inertia('landing/About', compact('services'));
+        return inertia('landing/About');
     }
 
     public function services()
     {
         $services = Service::all();
-        return inertia('landing/Services', compact('services'));
+        return inertia('landing/Services');
     }
 
     public function service($slug)

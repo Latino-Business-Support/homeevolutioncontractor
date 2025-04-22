@@ -7,7 +7,7 @@ import Button from './Button';
 export default function SingleService({ service, variant = 'primary' }: { service: ServiceT; variant?: 'primary' | 'secondary' }) {
     return (
         <div
-            className={cn('group flex flex-col gap-5 transition-all duration-300', {
+            className={cn('group flex h-full flex-col gap-5 transition-all duration-300', {
                 '': variant === 'primary',
                 '': variant === 'secondary',
             })}
@@ -16,7 +16,7 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                 <img
                     src={service.image_url}
                     alt={'Service of ' + service.name}
-                    className={cn('object- w-full transition-all duration-300 group-hover:scale-125', {
+                    className={cn('w-full object-cover transition-all duration-300 group-hover:scale-125', {
                         'aspect-square': variant === 'primary',
                         'aspect-video': variant === 'secondary',
                     })}
@@ -26,9 +26,11 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                 {service.name}
             </Link>
             {variant === 'secondary' && (
-                <div className="flex flex-col justify-between">
+                <div className="flex flex-1 flex-col justify-between">
                     <p className="text-gray-600">{service.description}</p>
-                    <Button label="View Details" icon={ArrowRight} />
+                    <div className="mt-auto">
+                        <Button label="View Details" icon={ArrowRight} />
+                    </div>
                 </div>
             )}
         </div>
