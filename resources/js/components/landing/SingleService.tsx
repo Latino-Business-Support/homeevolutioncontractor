@@ -1,9 +1,14 @@
+import { cn } from '@/lib/utils';
 import type { ServiceT } from '@/types/models';
 import { Link } from '@inertiajs/react';
 
-export default function SingleService({ service }: { service: ServiceT }) {
+export default function SingleService({ service, variant }: { service: ServiceT }) {
     return (
-        <div className="group flex flex-col gap-5 transition-all duration-300">
+        <div
+            className={cn('group flex flex-col gap-5 transition-all duration-300', {
+                '': variant === 'secondary',
+            })}
+        >
             <div className="overflow-hidden">
                 <img
                     src={service.image_url}
