@@ -30,9 +30,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 return inertia($page, ['status' => $response->getStatusCode()])
                     ->toResponse($request)
                     ->setStatusCode($response->getStatusCode());
-            } elseif ($response->getStatusCode() === 419) {
-                return back()->with(['message' => 'Session expired. Please try again.']);
-            }
+            } elseif ($response->getStatusCode() === 419) return back()->with(['message' => 'Session expired. Please try again.']);
             return $response;
         });
     })->create();

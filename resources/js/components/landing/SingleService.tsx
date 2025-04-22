@@ -26,7 +26,7 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                 {service.name}
             </Link>
             {variant === 'secondary' && (
-                <div className="flex flex-col">
+                <div className="justify flex h-full max-h-52 flex-col">
                     <p className="text-gray-600">{service.description}</p>
                     <Button label="View Details" icon={ArrowRight} />
                 </div>
