@@ -19,4 +19,9 @@ class Service extends Model
     {
         return asset('storage/' . config('paths.services_image') . '/' . $this->image);
     }
+
+    public function faqs()
+    {
+        return $this->hasMany(ServiceFaq::class);
+    }
 }

@@ -1,5 +1,7 @@
+import Contact from '@/components/landing/sections/Contact';
 import SingleService from '@/components/landing/SingleService';
 import Title from '@/components/landing/Title';
+import useSectionsIntersection from '@/hooks/landing/use-sections-intersection';
 import LandingLayout from '@/layouts/LandingLayout';
 import type { ServiceT } from '@/types/models';
 import { usePage } from '@inertiajs/react';
@@ -7,6 +9,8 @@ import { NotebookPen } from 'lucide-react';
 
 export default function Services() {
     const { services } = usePage().props as unknown as { services: ServiceT[] };
+    const { isVisible } = useSectionsIntersection({ classId: 'section' });
+
     return (
         <LandingLayout
             title="Services"
@@ -30,6 +34,7 @@ export default function Services() {
                     </div>
                 </div>
             </section>
+            <Contact className="section" id="section-contact" isVisible={isVisible['section-contact']} />
         </LandingLayout>
     );
 }

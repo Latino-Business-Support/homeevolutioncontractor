@@ -22,6 +22,14 @@ export type InfoT = {
     history: string;
 };
 
+export type ServiceFaqT = {
+    id: number;
+    question: string;
+    answer: string;
+    service_id: number;
+    service: ServiceT;
+};
+
 export type ServiceT = {
     id: number;
     name: string;
@@ -29,6 +37,7 @@ export type ServiceT = {
     image: string;
     image_url: string;
     description: string;
+    faqs: ServiceFaqT[];
 };
 
 export type ProjectT = {
@@ -43,5 +52,12 @@ export type SlideT = {
     description: string;
     image: string;
     image_url: string;
+    link: string;
+};
+
+export type SocialT = {
+    id: number;
+    name: string;
+    icon: string;
     link: string;
 };

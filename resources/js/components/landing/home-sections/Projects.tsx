@@ -2,7 +2,7 @@ import Button from '@/components/landing/Button';
 import Title from '@/components/landing/Title';
 import { cn } from '@/lib/utils';
 import type { ProjectT } from '@/types';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { FolderOpen } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
@@ -51,7 +51,7 @@ export default function Projects({ className = '', id = '', isVisible }) {
                         ))}
                     </Swiper>
                 </div>
-                <Button label="See All Projects" className="mx-auto mt-12" href={route('projects')} />
+                <Button as={Link} label="See All Projects" className="mx-auto mt-12" href={route('projects')} />
             </div>
         </section>
     );

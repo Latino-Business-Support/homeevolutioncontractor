@@ -16,10 +16,10 @@ Route::get('/storage/{any}', function ($any) {
 Route::get('/', [LandingController::class, 'home'])->name('home');
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/services', [LandingController::class, 'services'])->name('services');
-Route::get('/services/{slug}', [LandingController::class, 'home'])->name('service');
-Route::get('/projects', [LandingController::class, 'home'])->name('projects');
-Route::get('/faqs', [LandingController::class, 'home'])->name('faqs');
-Route::get('/contact', [LandingController::class, 'home'])->name('contact');
+Route::get('/services/{slug}', [LandingController::class, 'service'])->name('service');
+Route::get('/projects', [LandingController::class, 'projects'])->name('projects');
+Route::get('/faqs', [LandingController::class, 'faqs'])->name('faqs');
+Route::get('/contact', [LandingController::class, 'contact'])->name('contact');
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->name('home');

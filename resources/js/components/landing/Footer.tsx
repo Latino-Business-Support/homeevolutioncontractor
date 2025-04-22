@@ -1,9 +1,9 @@
 import { asset } from '@/lib/utils';
-import type { InfoT, ServiceT } from '@/types';
+import type { InfoT, ServiceT, SocialT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
 export default function Footer() {
-    const { info, services } = usePage().props as unknown as { info: InfoT; services: ServiceT[] };
+    const { info, services, socials } = usePage().props as unknown as { info: InfoT; services: ServiceT[]; socials: SocialT[] };
     return (
         <footer className="bg-c3 relative px-5 py-15 text-white dark:bg-transparent">
             <img
@@ -45,11 +45,9 @@ export default function Footer() {
                     <div className="mx-auto flex flex-col gap-10">
                         <Title text="Social Media" />
                         <ul className="flex flex-col gap-3">
-                            <Item as="a" text="Facebook" target="_blank" rel="noreferrer noopener" href="#" />
-                            <Item as="a" text="Instagram" target="_blank" rel="noreferrer noopener" href="#" />
-                            <Item as="a" text="Twitter" target="_blank" rel="noreferrer noopener" href="#" />
-                            <Item as="a" text="YouTube" target="_blank" rel="noreferrer noopener" href="#" />
-                            <Item as="a" text="LinkedIn" target="_blank" rel="noreferrer noopener" href="#" />
+                            {socials.map((social) => (
+                                <Item key={social.id} as="a" text={social.name} target="_blank" rel="noreferrer noopener" href={social.link} />
+                            ))}
                         </ul>
                     </div>
                 </div>

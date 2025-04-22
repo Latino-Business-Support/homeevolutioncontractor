@@ -1,13 +1,13 @@
 import { useAppearance } from '@/hooks/use-appearance';
 import { cn } from '@/lib/utils';
-import type { InfoT } from '@/types';
+import type { InfoT, SocialT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { Facebook, Instagram, Linkedin, Menu, Monitor, Moon, Sun, Twitter, X } from 'lucide-react';
+import { Menu, Monitor, Moon, Sun, X } from 'lucide-react';
 import { useState } from 'react';
 import { ComponentIcon } from './ComponentIcon';
 
 export default function Header() {
-    const { info } = usePage().props as unknown as { info: InfoT };
+    const { info, socials } = usePage().props as unknown as { info: InfoT; socials: SocialT[] };
     const [open, setOpen] = useState(false);
     return (
         <>
@@ -34,10 +34,9 @@ export default function Header() {
                             </ul>
                             <ul className="flex items-center gap-5">
                                 <span className="hidden lg:inline">Social Media:</span>
-                                <SocialOption href="#" icon={Facebook} />
-                                <SocialOption href="#" icon={Instagram} />
-                                <SocialOption href="#" icon={Twitter} />
-                                <SocialOption href="#" icon={Linkedin} />
+                                {socials.map((social) => (
+                                    <SocialOption key={social.id} href={social.link} icon={social.icon} />
+                                ))}
                             </ul>
                         </nav>
                         <div
@@ -72,11 +71,10 @@ function NavOption({ href, label }) {
 }
 
 function SocialOption({ href, icon }) {
-    const Icon = icon;
     return (
         <li>
-            <a href={href}>
-                <Icon size={18} />
+            <a href={href} target="_blank" rel="noopener noreferrer">
+                <ComponentIcon icon={icon} size={18} />
             </a>
         </li>
     );
