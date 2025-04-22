@@ -4,8 +4,6 @@ import { cn } from '@/lib/utils';
 import type { ServiceT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { NotebookPen } from 'lucide-react';
-import 'swiper/css';
-import 'swiper/css/autoplay';
 import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SingleService from '../SingleService';
@@ -20,7 +18,7 @@ export default function Services({ className = '', id = '', isVisible }) {
                     'translate-y-0 opacity-100': isVisible,
                 })}
             >
-                <Title titleIcon={NotebookPen} title="Our Services" subtitle="The Best Service" />
+                <Title titleIcon={NotebookPen} title="Our Services" subtitle="The Best {Services}" />
                 <div className="pt-10">
                     <Swiper
                         modules={[Keyboard, Autoplay, Pagination]}

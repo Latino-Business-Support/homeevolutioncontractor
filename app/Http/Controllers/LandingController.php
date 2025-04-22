@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Service;
 use App\Models\Slide;
 use App\Models\Social;
+use App\Services\GoogleReviewService;
 
 class LandingController extends Controller
 {
@@ -16,14 +17,16 @@ class LandingController extends Controller
         $services = Service::all();
         $projects = Project::all();
         $slides = Slide::all();
-        return inertia('landing/Home', compact('services', 'projects', 'slides', 'socials'));
+        $reviews = GoogleReviewService::all();
+        return inertia('landing/Home', compact('services', 'projects', 'slides', 'socials', 'reviews'));
     }
 
     public function about()
     {
         $socials = Social::all();
         $services = Service::all();
-        return inertia('landing/About', compact('services', 'socials'));
+        $reviews = GoogleReviewService::all();
+        return inertia('landing/About', compact('services', 'socials', 'reviews'));
     }
 
     public function services()

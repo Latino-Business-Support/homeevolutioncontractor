@@ -9,7 +9,7 @@ class GoogleReviewService
     public static function all($google_api_key = null, $google_place_id = null)
     {
         if (is_null($google_api_key) || is_null($google_place_id)) {
-            [$infos,  $info] = InfoFormatService::format();
+            [$infos,  $info] = InfoFormatService::format(null, true);
             $google_api_key = $info['google_api_key'] ?? null;
             $google_place_id = $info['google_place_id'] ?? null;
         }

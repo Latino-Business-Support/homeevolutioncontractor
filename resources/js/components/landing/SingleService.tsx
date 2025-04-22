@@ -8,8 +8,8 @@ export default function SingleService({ service, variant = 'primary' }: { servic
     return (
         <div
             className={cn('group flex h-full flex-col gap-5 overflow-hidden rounded transition-all duration-300 dark:bg-white/5', {
-                '': variant === 'primary',
-                '': variant === 'secondary',
+                // '': variant === 'primary',
+                // '': variant === 'secondary',
             })}
         >
             <div className="overflow-hidden rounded">

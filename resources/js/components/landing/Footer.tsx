@@ -7,7 +7,7 @@ export default function Footer() {
     return (
         <footer className="bg-c3 relative px-5 py-15 text-white dark:bg-transparent">
             <img
-                className="absolute inset-0 z-[1] h-full w-full object-cover opacity-20 dark:hidden"
+                className="absolute inset-0 z-[1] h-full w-full object-cover opacity-10 dark:hidden"
                 src={asset('img/info/bg1.webp')}
                 alt="Shape 1"
             />

@@ -20,7 +20,7 @@ export default function Projects({ className = '', id = '', isVisible }) {
                     'translate-y-0 opacity-100': isVisible,
                 })}
             >
-                <Title titleIcon={FolderOpen} title="Latest Projects" subtitle="Latest Projects Our Project Showcase" />
+                <Title titleIcon={FolderOpen} title="Latest Projects" subtitle="{Latest Projects} Our Project Showcase" />
                 <div className="pt-10">
                     <Swiper
                         modules={[Keyboard, Autoplay, Pagination]}

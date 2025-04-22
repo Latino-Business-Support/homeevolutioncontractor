@@ -11,9 +11,9 @@ export default function HeaderTop() {
             <div className="container mx-auto flex justify-between">
                 <img src={info.logo} alt={'Logo of ' + info.name} className="hidden h-13 lg:block" />
                 <div className="flex flex-1 items-center gap-5 lg:justify-center">
-                    <Item title="Call us any time" subtitle={info.phone} icon={Phone} href="#" />
-                    <Item title="Company Location" subtitle={info.address} icon={MapPin} href="#" />
-                    <Item title="Your Email " subtitle={info.email} icon={Mail} href="#" />
+                    <Item title="Call us any time" subtitle={info.phone} icon={Phone} href={'tel:' + info.phone} />
+                    <Item title="Company Location" subtitle={info.address} icon={MapPin} href={info.google_place} />
+                    <Item title="Your Email " subtitle={info.email} icon={Mail} href={'mailto:' + info.email} />
                 </div>
                 <Button className="py-2" label="GET A QUOTE" icon={ArrowUpRight} />
             </div>

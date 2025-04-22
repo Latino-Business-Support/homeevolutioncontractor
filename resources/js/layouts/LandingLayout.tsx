@@ -4,6 +4,8 @@ import Header from '@/components/landing/Header';
 import HeaderTop from '@/components/landing/HeaderTop';
 import type { InfoT } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
+import 'swiper/css';
+import 'swiper/css/autoplay';
 
 export default function LandingLayout({ title = '', paths = undefined, children }) {
     const { info } = usePage().props as unknown as { info: InfoT };

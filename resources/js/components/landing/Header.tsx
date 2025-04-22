@@ -53,7 +53,7 @@ export default function Header() {
                     </div>
                 </div>
             </header>
-            <style>{`@keyframes header-scroll-light{100%{box-shadow:0 5px 10px rgba(0,0,0,0.2);background-color:rgba(0,0,0,0.8);backdrop-filter:blur(5px)}}`}</style>
+            <style>{`@keyframes header-scroll-light{100%{box-shadow:0 5px 10px rgba(0,0,0,0.2);background-color:rgba(0,0,0,0.6);backdrop-filter:blur(20px)}}`}</style>
         </>
     );
 }

@@ -8,4 +8,5 @@ enum InfoTypeEnum: string
     case TEXTAREA = 'textarea';
     case IMAGE = 'image';
     case MARKDOWN = 'markdown';
+    case CREDENTIAL = 'credential';
 }
