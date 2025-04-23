@@ -21,9 +21,8 @@ class MailController extends Controller
             'message' => 'required|string|max:1000',
         ]);
         [$infos,  $info] = InfoFormatService::format(null, true);
-        DynamicMailService::apply($info);
         Mail::create($request->all());
-        MailFacade::to($info['email_user'])->send(new WebContactFormMail($request->all(), $info));
+        MailFacade::to(config('mail.from.address'))->send(new WebContactFormMail($request->all(), $info));
         return back();
     }
 

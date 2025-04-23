@@ -12,7 +12,7 @@ class DynamicMailService
         // Obtenemos los datos de configuración
         $username = $info['email_user'] ?? env('MAIL_USERNAME');
         $password = $info['email_pass'] ?? env('MAIL_PASSWORD');
-        
+
         // Reconfiguramos completamente el transporte SMTP
         $config = [
             'transport' => 'smtp',
@@ -24,15 +24,15 @@ class DynamicMailService
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN'),
         ];
-        
+
         // Aplicamos las configuraciones
         Config::set('mail.mailers.smtp', $config);
         Config::set('mail.from.address', $username);
         Config::set('mail.default', 'smtp');
-        
+
         // Importante: Resetear completamente el mailer para entornos de producción
         Mail::purge('smtp');
-        
+
         // También limpiamos las instancias del contenedor
         if (app()->bound('mailer')) {
             app()->forgetInstance('mailer');
