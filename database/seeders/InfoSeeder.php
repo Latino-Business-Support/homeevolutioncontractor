@@ -11,18 +11,20 @@ class InfoSeeder extends Seeder
 {
     public function run(): void
     {
-        // credentials
-        DB::table('infos')->insert([
-            ['label' => 'Google Place Api Key', 'field' => 'google_api_key', 'value' => env('GOOGLE_API_KEY', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
-            ['label' => 'Google Place ID', 'field' => 'google_place_id', 'value' => env('GOOGLE_PLACE_ID', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
-            // ['label' => 'Email User', 'field' => 'email_user', 'value' => env('MAIL_USERNAME', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
-            // ['label' => 'Email Pass', 'field' => 'email_pass', 'value' => env('MAIL_PASSWORD', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
-        ]);
 
         // images
         DB::table('infos')->insert([
             ['label' => 'Logo', 'field' => 'logo', 'type' => InfoTypeEnum::IMAGE->value],
             ['label' => 'Favicon', 'field' => 'favicon', 'type' => InfoTypeEnum::IMAGE->value],
+        ]);
+
+        // credentials
+        DB::table('infos')->insert([
+            ['label' => 'Google Place Api Key', 'field' => 'google_api_key', 'value' => env('GOOGLE_API_KEY', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
+            ['label' => 'Google Place ID', 'field' => 'google_place_id', 'value' => env('GOOGLE_PLACE_ID', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
+            ['label' => 'Email User', 'field' => 'email_user', 'value' => env('MAIL_USERNAME', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
+            ['label' => 'Email Pass', 'field' => 'email_pass', 'value' => env('MAIL_PASSWORD', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
+            ['label' => 'Captcha Secret Key', 'field' => 'captcha_secret_key', 'value' => env('CAPTCHA_SECRET_KEY', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
         ]);
 
         // texts
@@ -33,6 +35,8 @@ class InfoSeeder extends Seeder
             ['label' => 'Address', 'field' => 'address', 'value' => "618 N Lowell Ave, Syracuse, NY 13204"],
             ['label' => 'Google Place', 'field' => 'google_place', 'value' => "https://maps.app.goo.gl/nekwfwm4kGWQt2q89"],
             ['label' => 'Facebook', 'field' => 'facebook', 'value' => "https://www.facebook.com/#"],
+
+            ['label' => 'Captcha Site Key', 'field' => 'captcha_site_key', 'value' => env('CAPTCHA_SITE_KEY', 'xd')],
         ]);
 
         // textareas

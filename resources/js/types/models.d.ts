@@ -18,6 +18,7 @@ export type InfoT = {
     summary: string;
     facebook: string;
     google_place: string;
+    captcha_site_key: string;
     map: string;
     history: string;
 };

@@ -8,6 +8,7 @@ use App\Services\DynamicMailService;
 use App\Services\InfoFormatService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail as MailFacade;
+use Illuminate\Support\Facades\Http;
 
 class MailController extends Controller
 {
@@ -19,8 +20,18 @@ class MailController extends Controller
             'phone' => 'required|string|max:20',
             'address' => 'required|string|max:255',
             'message' => 'required|string|max:1000',
+            'g-recaptcha-response' => 'required|string',
         ]);
         [$infos,  $info] = InfoFormatService::format(null, true);
+
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => $info['captcha_secret_key'],
+            'response' => $request->input('g-recaptcha-response'),
+            'remoteip' => $request->ip(),
+        ]);
+        if (!$response->json('success')) return back()->withErrors(['g-recaptcha-response' => 'Invalid captcha.'])->withInput();
+
+        DynamicMailService::apply($info);
         Mail::create($request->all());
         MailFacade::to(config('mail.from.address'))->send(new WebContactFormMail($request->all(), $info));
         return back();

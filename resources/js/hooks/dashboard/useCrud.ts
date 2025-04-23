@@ -15,7 +15,8 @@ export default function useCrud({ resource, prefix = 'dashboard.' }: { resource:
         if (type === 'success') toast.success(message);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        if (e) e.preventDefault();
         if (!selectedRow)
             return post(route(prefix + resource + '.store'), {
                 preserveScroll: true,
@@ -43,6 +44,7 @@ export default function useCrud({ resource, prefix = 'dashboard.' }: { resource:
     };
 
     return {
+        errors,
         data,
         processing,
         modeForm: selectedRow !== null,
