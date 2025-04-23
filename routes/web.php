@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImageController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\SlideController;
+use App\Http\Controllers\SocialController;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +32,20 @@ Route::post('/crud-mails', [MailController::class, 'store'])->name('crud-mails.s
 
 Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')->group(function () {
     Route::get('/', [DashboardController::class, 'home'])->name('home');
+    Route::get('/info_md_editor/{info}', [DashboardController::class, 'info_md_editor'])->name('info_md_editor');
+    Route::get('/slides', [DashboardController::class, 'slides'])->name('slides');
+    Route::get('/socials', [DashboardController::class, 'socials'])->name('socials');
+    Route::get('/images', [DashboardController::class, 'images'])->name('images');
+    Route::get('/services', [DashboardController::class, 'services'])->name('services');
+    Route::get('/mails', [DashboardController::class, 'mails'])->name('mails');
+
+    // controllers for crud
+    Route::post('/crud-info', [InfoController::class, 'update'])->name('crud-info.update');
+    Route::resource('/crud-slides', SlideController::class)->parameters(['crud-slides' => 'slide'])->names('crud-slides')->only(['store', 'update', 'destroy']);
+    Route::resource('/crud-socials', SocialController::class)->parameters(['crud-socials' => 'social'])->names('crud-socials')->only(['store', 'update', 'destroy']);
+    Route::resource('/crud-images', ImageController::class)->parameters(['crud-images' => 'image'])->names('crud-images')->only(['store', 'destroy']);
+    Route::resource('/crud-services', ServiceController::class)->parameters(['crud-services' => 'service'])->names('crud-services')->only(['store', 'update', 'destroy']);
+    Route::resource('/crud-mails', MailController::class)->parameters(['crud-mails' => 'mail'])->names('crud-mails')->only(['destroy']);
 });
 
 require __DIR__ . '/settings.php';

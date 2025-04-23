@@ -3,7 +3,12 @@ import { cn } from '@/lib/utils';
 import { LucideIcon, Monitor, Moon, Sun } from 'lucide-react';
 import { HTMLAttributes } from 'react';
 
-export default function AppearanceToggleTab({ className = '', ...props }: HTMLAttributes<HTMLDivElement>) {
+export default function AppearanceToggleTab({
+    variant = 'default',
+    className = '',
+    classButton = '',
+    ...props
+}: { variant?: 'default' | 'sidebar'; classButton?: string } & HTMLAttributes<HTMLDivElement>) {
     const { appearance, updateAppearance } = useAppearance();
 
     const tabs: { value: Appearance; icon: LucideIcon; label: string }[] = [
@@ -13,20 +18,43 @@ export default function AppearanceToggleTab({ className = '', ...props }: HTMLAt
     ];
 
     return (
-        <div className={cn('inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800', className)} {...props}>
+        <div
+            className={cn(
+                'inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800',
+                {
+                    flex: variant === 'sidebar',
+                },
+                className,
+            )}
+            {...props}
+        >
             {tabs.map(({ value, icon: Icon, label }) => (
                 <button
                     key={value}
                     onClick={() => updateAppearance(value)}
                     className={cn(
-                        'flex items-center rounded-md px-3.5 py-1.5 transition-colors',
-                        appearance === value
-                            ? 'bg-white shadow-xs dark:bg-neutral-700 dark:text-neutral-100'
-                            : 'text-neutral-500 hover:bg-neutral-200/60 hover:text-black dark:text-neutral-400 dark:hover:bg-neutral-700/60',
+                        'flex cursor-pointer items-center rounded-md px-3.5 py-1.5 transition-colors',
+                        {
+                            'bg-white shadow-xs dark:bg-neutral-700 dark:text-neutral-100': appearance === value,
+                            'text-neutral-500 hover:bg-neutral-200/60 hover:text-black dark:text-neutral-400 dark:hover:bg-neutral-700/60':
+                                appearance !== value,
+                            'flex-1': variant === 'sidebar',
+                        },
+                        classButton,
                     )}
                 >
-                    <Icon className="-ml-1 h-4 w-4" />
-                    <span className="ml-1.5 text-sm">{label}</span>
+                    <Icon
+                        className={cn('-ml-1 h-4 w-4', {
+                            'm-0 flex-1': variant === 'sidebar',
+                        })}
+                    />
+                    <span
+                        className={cn('ml-1.5 text-sm', {
+                            hidden: variant === 'sidebar',
+                        })}
+                    >
+                        {label}
+                    </span>
                 </button>
             ))}
         </div>

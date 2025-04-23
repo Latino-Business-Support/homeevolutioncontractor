@@ -2,64 +2,44 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\InfoTypeEnum;
 use App\Models\Info;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
+use Illuminate\Support\MessageBag;
+use \Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Validator;
 
 class InfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function update(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Info $info)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Info $info)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Info $info)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Info $info)
-    {
-        //
+        $request->validate([
+            'infos' => 'required|array',
+            'infos.*.id' => 'required|exists:infos,id',
+            'infos.*.type' => 'required|in:' . implode(',', array_column(InfoTypeEnum::cases(), 'value')),
+        ]);
+        $allErrors = new MessageBag;
+        foreach ($request->infos as $index => $infoData) {
+            $info = Info::find($infoData['id']);
+            if ($info->type === InfoTypeEnum::IMAGE->value && $infoData['value'] instanceof UploadedFile) {
+                $infoRequest = Request::create('/', 'POST', $infoData, [], ['value' => $infoData['value']]);
+                $data = FileUploadService::upload($infoRequest, 'value', config('paths.info_image'), $info->value);
+                $info->update(['value' => $data['value']]);
+            } elseif ($info->type === InfoTypeEnum::TEXT->value || $info->type === InfoTypeEnum::MARKDOWN->value) {
+                $validator = Validator::make(
+                    ['value' => $infoData['value'] ?? null],
+                    ['value' => 'required|string'],
+                    ['value.required' => "The field {$infoData['label']} is required."]
+                );
+                if ($validator->fails()) {
+                    foreach ($validator->errors()->all() as $message) {
+                        $allErrors->add("infos.$index.value", $message);
+                    }
+                } else $info->update(['value' => $infoData['value']]);
+            }
+        }
+        if ($allErrors->isNotEmpty()) return redirect()->back()->withErrors($allErrors)->withInput();
+        return back();
     }
 }

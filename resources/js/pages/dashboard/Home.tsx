@@ -1,35 +1,103 @@
-import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
+import Button from '@/components/dashboard/Button';
+import { Input, InputImage, InputTextarea } from '@/components/dashboard/Form';
 import AppLayout from '@/layouts/app-layout';
-import { type BreadcrumbItem } from '@/types';
-import { Head } from '@inertiajs/react';
-
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-    },
-];
+import { cn } from '@/lib/utils';
+import type { InfosT } from '@/types';
+import { Link, useForm, usePage } from '@inertiajs/react';
+import { ExternalLink } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function Home() {
+    const { infos } = usePage().props as unknown as { infos: InfosT[] };
+    const { data, setData, errors, post, processing } = useForm({ infos });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        post(route('dashboard.crud-info.update'), {
+            preserveScroll: true,
+            onSuccess: () => toast.success('Data saved successfully'),
+            onError: (error) => console.error(error),
+        });
+    };
+
+    const handleChange = (field: string, value: string) => {
+        setData(
+            'infos',
+            data.infos.map((info) => (info.field === field ? { ...info, value } : info)),
+        );
+    };
+
+    const inputsImage = data.infos.filter((info) => info.type === 'image');
+    const inputsText = data.infos.filter((info) => info.type === 'text');
+    const inputsTextarea = data.infos.filter((info) => info.type === 'textarea');
+    const inputsMarkdown = data.infos.filter((info) => info.type === 'markdown');
+
     return (
-        <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Dashboard" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <div className="grid auto-rows-min gap-4 md:grid-cols-3">
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+        <AppLayout title="Home" breadcrumbs={[{ title: 'Dashboard', href: route('dashboard.home') }]}>
+            <section className="p-5">
+                <form onSubmit={handleSubmit} className="container mx-auto">
+                    <div className="grid grid-cols-2 gap-5">
+                        {inputsImage.map((info, index) => (
+                            <InputImage
+                                key={info.id}
+                                label={info.label}
+                                accept="image/*"
+                                value={info.value}
+                                error={errors[`infos.${index}.value`]}
+                                disabled={processing}
+                                onChange={(e) => handleChange(info.field, e)}
+                                classImage="p-5"
+                                currentImageUrl={info.formatted}
+                            />
+                        ))}
                     </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                    <div className="grid gap-5 md:grid-cols-2">
+                        {inputsText.map((info, index) => (
+                            <Input
+                                key={info.id}
+                                label={info.label}
+                                placeholder={info.field}
+                                value={info.value}
+                                error={errors[`infos.${index}.value`]}
+                                disabled={processing}
+                                className={cn({ 'lg:col-span-2': inputsText.length % 2 !== 0 && index === 0 })}
+                                onChange={(e) => handleChange(info.field, e)}
+                            />
+                        ))}
                     </div>
-                    <div className="border-sidebar-border/70 dark:border-sidebar-border relative aspect-video overflow-hidden rounded-xl border">
-                        <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
+                    <div className="mb-5 grid gap-5 md:grid-cols-2">
+                        {inputsMarkdown.map((info) => (
+                            <label key={info.id} className="flex flex-col">
+                                <b className="text-sm">{info.label}</b>
+                                <Button
+                                    as={Link}
+                                    label="Markdown Editor"
+                                    icon={ExternalLink}
+                                    href={route('dashboard.info_md_editor', info.id)}
+                                    className="mt-0.5 mr-auto"
+                                    classIcon="mb-1"
+                                />
+                            </label>
+                        ))}
                     </div>
-                </div>
-                <div className="border-sidebar-border/70 dark:border-sidebar-border relative min-h-[100vh] flex-1 overflow-hidden rounded-xl border md:min-h-min">
-                    <PlaceholderPattern className="absolute inset-0 size-full stroke-neutral-900/20 dark:stroke-neutral-100/20" />
-                </div>
-            </div>
+                    <div className="grid gap-5 lg:grid-cols-2">
+                        {inputsTextarea.map((info, index) => (
+                            <InputTextarea
+                                key={info.id}
+                                label={info.label}
+                                placeholder={info.field}
+                                value={info.value}
+                                error={errors[`infos.${index}.value`]}
+                                disabled={processing}
+                                onChange={(e) => handleChange(info.field, e)}
+                                className="grid"
+                            />
+                        ))}
+                    </div>
+
+                    <Button label="Save Changes" type="submit" disabled={processing} className="mt-5" />
+                </form>
+            </section>
         </AppLayout>
     );
 }

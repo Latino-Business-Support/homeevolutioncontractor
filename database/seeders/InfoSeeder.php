@@ -41,7 +41,7 @@ class InfoSeeder extends Seeder
 
         // textareas
         DB::table('infos')->insert([
-            ['label' => 'Summary', 'field' => 'summary', 'value' => "At Home Evolution Contractor, our mission is to empower homeowners to achieve their dream living spaces through exceptional craftsmanship and customer satisfaction. Founded on integrity, quality, and community, we deliver top-notch roofing, siding, and gutter services with a personal touch. Our experienced professionals bring expertise and dedication to every project, ensuring seamless execution and stunning results.\n\nWe pride ourselves on our unwavering commitment to quality, honest communication, and customer focus. Our licensed, insured, and certified team stays up-to-date with industry advancements to provide tailored solutions and comprehensive warranties.", 'type' => InfoTypeEnum::TEXTAREA->value],
+            ['label' => 'Summary', 'field' => 'summary', 'value' => "At Home Evolution Contractor, our mission is to empower homeowners to achieve their dream living spaces through exceptional craftsmanship and customer satisfaction. Founded on integrity, quality, and community, we deliver top-notch roofing, siding, and gutter services with a personal touch. Our experienced professionals bring expertise and dedication to every project, ensuring seamless execution and stunning results.", 'type' => InfoTypeEnum::TEXTAREA->value],
             ['label' => 'Iframe Src Map', 'field' => 'map', 'value' => "https://maps.google.com/maps?q=Nico%E2%80%99s%20Roofing%20and%20Cleaning%20Castle%20Hayne%2C%20NC%2028429&t=m&z=10&output=embed&iwloc=near", 'type' => InfoTypeEnum::TEXTAREA->value],
         ]);
 

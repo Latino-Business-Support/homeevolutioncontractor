@@ -1,34 +1,58 @@
-import { NavFooter } from '@/components/nav-footer';
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+    useSidebar,
+} from '@/components/ui/sidebar';
+import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
+import { Images, Info, LayoutGrid, Mails, Share2 } from 'lucide-react';
 import AppLogo from './app-logo';
+import AppearanceToggleTab from './appearance-tabs';
 
 const mainNavItems: NavItem[] = [
     {
-        title: 'Dashboard',
-        href: '/dashboard',
+        title: 'Information',
+        href: route('dashboard.home'),
+        icon: Info,
+    },
+    {
+        title: 'Slides',
+        href: route('dashboard.slides'),
+        icon: Images,
+    },
+    {
+        title: 'Socials',
+        href: route('dashboard.socials'),
+        icon: Share2,
+    },
+    {
+        title: 'Images',
+        href: route('dashboard.images'),
+        icon: Images,
+    },
+    {
+        title: 'Services',
+        href: route('dashboard.services'),
         icon: LayoutGrid,
     },
-];
-
-const footerNavItems: NavItem[] = [
     {
-        title: 'Repository',
-        href: 'https://github.com/laravel/react-starter-kit',
-        icon: Folder,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
+        title: 'Mails',
+        href: route('dashboard.mails'),
+        icon: Mails,
     },
 ];
 
 export function AppSidebar() {
+    const { open } = useSidebar();
+
     return (
         <Sidebar collapsible="icon" variant="inset">
             <SidebarHeader>
@@ -48,7 +72,15 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
-                <NavFooter items={footerNavItems} className="mt-auto" />
+                <AppearanceToggleTab
+                    variant="sidebar"
+                    className={cn({
+                        'flex-col': !open,
+                    })}
+                    classButton={cn({
+                        'flex items-center justify-center p-0 py-1': !open,
+                    })}
+                />
                 <NavUser />
             </SidebarFooter>
         </Sidebar>

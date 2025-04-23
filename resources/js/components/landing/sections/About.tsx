@@ -1,8 +1,12 @@
 import Title from '@/components/landing/Title';
 import { asset, cn } from '@/lib/utils';
+import type { InfoT } from '@/types';
+import { usePage } from '@inertiajs/react';
 import { Info } from 'lucide-react';
 
 export default function About({ className = '', id = '', isVisible }) {
+    const { info } = usePage().props as unknown as { info: InfoT };
+
     return (
         <section className={cn('overflow-hidden px-5 py-20', className)} id={id}>
             <div className="container mx-auto flex flex-col justify-between gap-10 md:flex-row">
@@ -26,7 +30,7 @@ export default function About({ className = '', id = '', isVisible }) {
                         titleIcon={Info}
                         title="About Us"
                         subtitle="Your {Trusted Contractor} in Syracuse, NY and surrounding areas"
-                        description="At Home Evolution Contractor, our mission is to empower homeowners to achieve their dream living spaces through exceptional craftsmanship and customer satisfaction. Founded on integrity, quality, and community, we deliver top-notch roofing, siding, and gutter services with a personal touch. Our experienced professionals bring expertise and dedication to every project, ensuring seamless execution and stunning results."
+                        description={info.summary}
                         className="md:items-start md:text-left"
                     />
                 </div>

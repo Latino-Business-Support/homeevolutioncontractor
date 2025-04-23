@@ -15,19 +15,19 @@ class SlideSeeder extends Seeder
                 'image' => '1.webp',
                 'title' => 'Building Trust, One {Roof} at a Time',
                 'description' => 'This involves exploration and production (E&P) of oil and natural gas.',
-                'link' => route('services'),
+                'link' => '/services',
             ],
             [
                 'image' => '2.webp',
                 'title' => 'Quality {Roofing Solutions} for Every Home',
                 'description' => 'This involves exploration and production (E&P) of oil and natural gas.',
-                'link' =>  route('services'),
+                'link' =>  '/services',
             ],
             [
                 'image' => '3.webp',
                 'title' => 'Your Trusted Partner in {Home Renovations}',
                 'description' => 'This involves exploration and production (E&P) of oil and natural gas.',
-                'link' =>  route('services'),
+                'link' =>  '/services',
             ],
         ]);
     }
