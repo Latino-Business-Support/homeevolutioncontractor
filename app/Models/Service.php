@@ -11,6 +11,7 @@ class Service extends Model
         'slug',
         'image',
         'description',
+        'page',
     ];
 
     protected $appends = ['image_url'];

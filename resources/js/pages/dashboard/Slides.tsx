@@ -1,6 +1,6 @@
 import Button from '@/components/dashboard/Button';
 import ConfirmModal from '@/components/dashboard/ConfirmModal';
-import { Form, Input, InputCheck, InputImage, InputTextarea } from '@/components/dashboard/Form';
+import { Form, Input, InputImage, InputTextarea } from '@/components/dashboard/Form';
 import { Table, Td, TdActions, Th } from '@/components/dashboard/Table';
 import useCrud from '@/hooks/dashboard/useCrud';
 import AppLayout from '@/layouts/app-layout';
@@ -48,16 +48,15 @@ export default function Slides() {
                     <Form isShow={modeForm} onSubmit={handleSubmit} className="mx-auto flex w-full flex-col">
                         <div className="flex w-full flex-col gap-5 sm:flex-row">
                             <InputImage {...addField('image', 'Image')} className="max-h-48" />
-                            <div className="flex flex-1 flex-col gap-1">
+                            <div className="grid flex-1 gap-x-5 gap-y-1 lg:grid-cols-2">
                                 <Input {...addField('title', 'Title')} />
                                 <Input {...addField('link', 'Link')} />
-                                <InputCheck {...addField('internal', 'Is internal?')} defaultValue={true} />
-                                <InputTextarea {...addField('description', 'Description')} />
+                                <InputTextarea {...addField('description', 'Description')} className="lg:col-span-2" />
                             </div>
                         </div>
                         <div className="col-span-2 flex gap-5">
                             <Button label="Save" />
-                            <Button label="Cancel" variant="destructive" onClick={setModeForm(false)} />
+                            <Button label="Cancel" variant="destructive" onClick={setModeForm(false)} type="button" />
                         </div>
                     </Form>
                     <ConfirmModal

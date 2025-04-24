@@ -6,12 +6,12 @@ import useCrud from '@/hooks/dashboard/useCrud';
 import AppLayout from '@/layouts/app-layout';
 import type { ServiceT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { CircleHelp, Images, Pen, Sheet, Trash } from 'lucide-react';
+import { CircleHelp, Pen, Sheet, Trash } from 'lucide-react';
 
 export default function Services() {
     const { services } = usePage().props as unknown as { services: ServiceT[] };
 
-    const { addField, modeForm, setModeForm, handleSubmit, showModal, setDeleteMode, handleDelete } = useCrud({ resource: 'crud-services' });
+    const { addField, modeForm, setModeForm, handleSubmit, showModal, setDeleteMode, handleDelete, setData } = useCrud({ resource: 'crud-services' });
     // console.log(data);
 
     return (
@@ -24,8 +24,9 @@ export default function Services() {
                         childrenTitles={
                             <>
                                 <Th label="ID" />
-                                <Th label="Image" />
+                                <Th label="Image " />
                                 <Th label="Name" />
+                                <Th label="Slug" />
                                 <Th label="Actions" />
                             </>
                         }
@@ -41,10 +42,10 @@ export default function Services() {
                                     />
                                 </Td>
                                 <Td label={item.name} />
+                                <Td label={item.slug} />
                                 <TdActions className="w-0">
                                     <Button icon={CircleHelp} as={Link} href={route('dashboard.service_faqs', item.id)} />
-                                    <Button icon={Images} as={Link} href={route('dashboard.service_images', item.id)} />
-                                    <Button icon={Sheet} as={Link} href={route('dashboard.service', item.id)} />
+                                    <Button icon={Sheet} as={Link} href={route('dashboard.service_page', item.id)} />
                                     <Button variant="secondary" icon={Pen} onClick={setModeForm(item)} />
                                     <Button variant="destructive" icon={Trash} onClick={setDeleteMode(item)} />
                                 </TdActions>
@@ -54,14 +55,28 @@ export default function Services() {
                     <Form isShow={modeForm} onSubmit={handleSubmit} className="mx-auto flex w-full flex-col">
                         <div className="flex w-full flex-col gap-5 sm:flex-row">
                             <InputImage {...addField('image', 'Image')} className="max-h-48" />
-                            <div className="flex flex-1 flex-col gap-1">
-                                <Input {...addField('name', 'Name')} />
-                                <InputTextarea {...addField('description', 'Description')} />
+                            <div className="grid flex-1 gap-x-5 gap-y-1 lg:grid-cols-2">
+                                <Input
+                                    {...addField('name', 'Name')}
+                                    onChange={(v) => {
+                                        setData('name', v);
+                                        setData(
+                                            'slug',
+                                            v
+                                                .toLowerCase()
+                                                .replace(/\s+/g, '-')
+                                                .normalize('NFD')
+                                                .replace(/[\u0300-\u036f]/g, ''),
+                                        );
+                                    }}
+                                />
+                                <Input {...addField('slug', 'Slug')} />
+                                <InputTextarea {...addField('description', 'Description')} className="lg:col-span-2" />
                             </div>
                         </div>
                         <div className="col-span-2 flex gap-5">
                             <Button label="Save" />
-                            <Button label="Cancel" variant="destructive" onClick={setModeForm(false)} />
+                            <Button label="Cancel" variant="destructive" onClick={setModeForm(false)} type="button" />
                         </div>
                     </Form>
                     <ConfirmModal

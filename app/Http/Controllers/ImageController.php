@@ -3,63 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Services\FileUploadService;
 use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate(['name' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048']);
+        $data = FileUploadService::upload($request, 'name', config('paths.images_url'));
+        Image::create($data);
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Image $image)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Image $image)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Image $image)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Image $image)
     {
-        //
+        FileUploadService::delete(config('paths.images_url'), $image->name);
+        $image->delete();
+        return back();
     }
 }

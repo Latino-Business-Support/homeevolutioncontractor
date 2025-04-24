@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import type { ImageT, InfoT } from '@/types';
 import { usePage } from '@inertiajs/react';
 import MonacoEditor from '@monaco-editor/react';
-import { AlignCenter, Bold, Braces, Heading, Image, Images, List, Signature } from 'lucide-react';
+import { AlignCenter, Bold, Braces, Heading, Image, Images, List, Signature, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -70,6 +70,12 @@ Write here your content in **Markdown** or **HTML**.
             </div>
             <div className={cn('fixed inset-0 z-10 flex items-center justify-center px-5', { hidden: !openImages })}>
                 <div className="bg-background/5 fixed inset-0 cursor-pointer backdrop-blur-sm" onClick={() => setOpenImages(false)} />
+                <button
+                    className="absolute top-5 right-5 z-[2] cursor-pointer rounded-full bg-black/20 p-2 text-white transition-all duration-200 hover:scale-105 hover:bg-black/50"
+                    onClick={() => setOpenImages(false)}
+                >
+                    <X />
+                </button>
                 <div className="bg-background relative z-[1] mx-auto h-full max-h-[500px] w-full max-w-[800px] overflow-auto rounded-lg border p-5">
                     <h3 className="mb-2 text-lg font-bold">Images</h3>
                     <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-8">
@@ -79,13 +85,14 @@ Write here your content in **Markdown** or **HTML**.
                                 onClick={insertAtCursor(
                                     `<img alt="${image.name}" style="border-radius:5px" src="/storage/img/images/${image.name}" />`,
                                 )}
-                                className="cursor-pointer transition-transform duration-200 hover:scale-110"
+                                className="grid cursor-pointer transition-transform duration-200 hover:scale-110"
                             >
                                 <img
                                     className="aspect-video w-full rounded object-cover transition-transform duration-200"
                                     src={image.url}
                                     alt={'Image of service ' + image.name}
                                 />
+                                <span className="truncate">{image.name}</span>
                             </button>
                         ))}
                     </div>

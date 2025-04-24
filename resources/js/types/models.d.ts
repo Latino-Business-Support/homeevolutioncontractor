@@ -42,12 +42,6 @@ export type ServiceT = {
     faqs: ServiceFaqT[];
 };
 
-export type ProjectT = {
-    id: number;
-    image: string;
-    image_url: string;
-};
-
 export type SlideT = {
     id: number;
     title: string;
@@ -75,4 +69,16 @@ export type ReviewT = {
     text: string;
     time: number;
     translated: boolean;
+};
+
+export type ProjectT = {
+    id: number;
+    image: string;
+    image_url: string;
+};
+
+export type ImageT = {
+    id: number;
+    name: string;
+    url: string;
 };

@@ -7,59 +7,32 @@ use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'link' => 'required|url|max:255',
+            'icon' => 'required|string|max:255',
+
+        ]);
+        Social::create($request->all());
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Social $social)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Social $social)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Social $social)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'link' => 'required|url|max:255',
+            'icon' => 'required|string|max:255',
+        ]);
+        $social->update($request->all());
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Social $social)
     {
-        //
+        $social->delete();
+        return back();
     }
 }

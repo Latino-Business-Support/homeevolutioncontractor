@@ -36,12 +36,12 @@ export default function Socials() {
                                 <>
                                     <Td label={String(item.id)} className="w-0" />
                                     <Td>
-                                        <a href={item.url} target="_blank" rel="noopener noreferrer">
-                                            <Icon style={{ color: item.color }} />
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                            <Icon />
                                         </a>
                                     </Td>
                                     <Td>
-                                        <a href={item.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
                                             {item.name}
                                         </a>
                                     </Td>
@@ -66,8 +66,7 @@ export default function Socials() {
                                 </InputSelect>
                                 <Icon className="my-auto" style={{ color: data.color }} />
                             </div>
-                            <Input {...addField('url', 'Link')} />
-                            <Input {...addField('color', 'color')} type="color" classInput="p-1 w-full cursor-pointer" />
+                            <Input {...addField('link', 'Link')} type="url" />
                         </div>
                         <div className="flex gap-5 md:col-span-2">
                             <Button label="Save" />

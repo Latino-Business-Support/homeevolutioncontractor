@@ -7,59 +7,31 @@ use Illuminate\Http\Request;
 
 class ServiceFaqController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
+            'service_id' => 'required|exists:services,id',
+        ]);
+        ServiceFaq::create($request->all());
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ServiceFaq $serviceFaq)
+    public function update(Request $request, ServiceFaq $service_faq)
     {
-        //
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
+            'service_id' => 'required|exists:services,id',
+        ]);
+        $service_faq->update($request->all());
+        return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ServiceFaq $serviceFaq)
+    public function destroy(ServiceFaq $service_faq)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ServiceFaq $serviceFaq)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ServiceFaq $serviceFaq)
-    {
-        //
+        $service_faq->delete();
+        return back();
     }
 }

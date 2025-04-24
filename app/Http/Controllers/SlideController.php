@@ -4,62 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\Slide;
 use Illuminate\Http\Request;
+use App\Services\FileUploadService;
+
 
 class SlideController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $validations = [];
+    public function __construct()
     {
-        //
+        $this->validations = [
+            'title' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'link' => 'required|max:255',
+        ];
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validations);
+        $data = FileUploadService::upload($request, 'image', config('paths.slides_image'));
+        Slide::create($data);
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Slide $slide)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Slide $slide)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Slide $slide)
     {
-        //
+        $request->validate([...$this->validations, 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048']);
+        $data = FileUploadService::upload($request, 'image', config('paths.slides_image'), $slide->image);
+        $slide->update($data);
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Slide $slide)
     {
-        //
+        FileUploadService::delete(config('paths.slides_image'), $slide->image);
+        $slide->delete();
+        return back();
     }
 }

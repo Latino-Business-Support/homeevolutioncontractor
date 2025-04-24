@@ -8,9 +8,7 @@ import { usePage } from '@inertiajs/react';
 
 export default function Images() {
     const { images } = usePage().props as unknown as { images: ImageT[] };
-
     const { addField, modeForm, setModeForm, handleSubmit, showModal, setDeleteMode, handleDelete } = useCrud({ resource: 'crud-images' });
-    // console.log(data);
 
     return (
         <AppLayout title="Images" breadcrumbs={[{ title: 'Images', href: route('dashboard.images') }]}>
@@ -21,7 +19,7 @@ export default function Images() {
                         <InputImage {...addField('name', 'Image')} />
                         <div className="col-span-2 flex gap-5">
                             <Button label="Save" />
-                            <Button label="Cancel" variant="destructive" onClick={setModeForm(false)} />
+                            <Button label="Cancel" variant="destructive" onClick={setModeForm(false)} type="button" />
                         </div>
                     </Form>
                     <ConfirmModal
@@ -55,11 +53,7 @@ function GridImages({
             <div className="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4">
                 {images.map((image) => (
                     <div key={image.id} className="flex flex-col gap-2">
-                        <img
-                            className="aspect-video w-full rounded object-cover transition-transform duration-200"
-                            src={image.url}
-                            alt={'Image of service ' + image.name}
-                        />
+                        <img className="aspect-video w-full rounded object-cover transition-transform duration-200" src={image.url} />
                         <Button className="flex-1" label="Delete" variant="destructive" onClick={onClickDelete(image)} />
                     </div>
                 ))}

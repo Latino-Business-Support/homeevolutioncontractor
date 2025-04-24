@@ -43,3 +43,12 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+export type MailT = {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    message: string;
+};

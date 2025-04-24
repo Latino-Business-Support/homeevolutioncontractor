@@ -5,7 +5,9 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceFaqController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\SocialController;
 use App\Models\Service;
@@ -37,6 +39,9 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Route::get('/socials', [DashboardController::class, 'socials'])->name('socials');
     Route::get('/images', [DashboardController::class, 'images'])->name('images');
     Route::get('/services', [DashboardController::class, 'services'])->name('services');
+    Route::get('/services/{service}/page', [DashboardController::class, 'service_page'])->name('service_page');
+    Route::get('/services/{service}/faqs', [DashboardController::class, 'service_faqs'])->name('service_faqs');
+    Route::get('/projects', [DashboardController::class, 'projects'])->name('projects');
     Route::get('/mails', [DashboardController::class, 'mails'])->name('mails');
 
     // controllers for crud
@@ -45,6 +50,8 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Route::resource('/crud-socials', SocialController::class)->parameters(['crud-socials' => 'social'])->names('crud-socials')->only(['store', 'update', 'destroy']);
     Route::resource('/crud-images', ImageController::class)->parameters(['crud-images' => 'image'])->names('crud-images')->only(['store', 'destroy']);
     Route::resource('/crud-services', ServiceController::class)->parameters(['crud-services' => 'service'])->names('crud-services')->only(['store', 'update', 'destroy']);
+    Route::resource('/crud-projects', ProjectController::class)->parameters(['crud-projects' => 'project'])->names('crud-projects')->only(['store', 'update', 'destroy']);
+    Route::resource('/crud-servicefaqs', ServiceFaqController::class)->parameters(['crud-servicefaqs' => 'service_faq'])->names('crud-servicefaqs')->only(['store', 'update', 'destroy']);
     Route::resource('/crud-mails', MailController::class)->parameters(['crud-mails' => 'mail'])->names('crud-mails')->only(['destroy']);
 });
 

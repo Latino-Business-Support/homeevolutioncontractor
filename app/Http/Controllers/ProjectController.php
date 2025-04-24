@@ -4,62 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Services\FileUploadService;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    private $validations = [];
+    public function __construct()
     {
-        //
+        $this->validations = [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+        ];
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validations);
+        $data = FileUploadService::upload($request, 'image', config('paths.projects_image'));
+        Project::create($data);
+        return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Project $project)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Project $project)
     {
-        //
+        $request->validate([...$this->validations, 'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048']);
+        $data = FileUploadService::upload($request, 'image', config('paths.projects_image'), $project->image);
+        $project->update($data);
+        return back();
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Project $project)
     {
-        //
+        FileUploadService::delete(config('paths.projects_image'), $project->image);
+        $project->delete();
+        return back();
     }
 }
