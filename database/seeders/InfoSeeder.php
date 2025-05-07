@@ -36,7 +36,7 @@ class InfoSeeder extends Seeder
             ['label' => 'Google Place', 'field' => 'google_place', 'value' => "https://maps.app.goo.gl/nekwfwm4kGWQt2q89"],
             ['label' => 'Facebook', 'field' => 'facebook', 'value' => "https://www.facebook.com/#"],
 
-            ['label' => 'Captcha Site Key', 'field' => 'captcha_site_key', 'value' => env('CAPTCHA_SITE_KEY', 'xd')],
+            ['label' => 'Captcha Site Key', 'field' => 'captcha_site_key', 'value' => env('CAPTCHA_SITE_KEY', '')],
         ]);
 
         // textareas

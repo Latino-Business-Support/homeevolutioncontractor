@@ -51,9 +51,6 @@ export default function Footer() {
                         </ul>
                     </div>
                 </div>
-                <div className="flex w-full justify-center pt-1 text-center">
-                    <span>©2025 All rights For Abuild. Designed By RSTheme.</span>
-                </div>
             </div>
         </footer>
     );
