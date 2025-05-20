@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\InfoController;
 use App\Http\Controllers\LandingController;
@@ -43,6 +44,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Route::get('/services/{service}/faqs', [DashboardController::class, 'service_faqs'])->name('service_faqs');
     Route::get('/projects', [DashboardController::class, 'projects'])->name('projects');
     Route::get('/mails', [DashboardController::class, 'mails'])->name('mails');
+    Route::get('/emails', [DashboardController::class, 'emails'])->name('emails');
 
     // controllers for crud
     Route::post('/crud-info', [InfoController::class, 'update'])->name('crud-info.update');
@@ -53,6 +55,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Route::resource('/crud-projects', ProjectController::class)->parameters(['crud-projects' => 'project'])->names('crud-projects')->only(['store', 'update', 'destroy']);
     Route::resource('/crud-servicefaqs', ServiceFaqController::class)->parameters(['crud-servicefaqs' => 'service_faq'])->names('crud-servicefaqs')->only(['store', 'update', 'destroy']);
     Route::resource('/crud-mails', MailController::class)->parameters(['crud-mails' => 'mail'])->names('crud-mails')->only(['destroy']);
+    Route::resource('/crud-emails', EmailController::class)->parameters(['crud-emails' => 'email'])->names('crud-emails')->only(['store', 'update', 'destroy']);
 });
 
 require __DIR__ . '/settings.php';

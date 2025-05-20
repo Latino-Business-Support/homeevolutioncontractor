@@ -13,7 +13,7 @@ import {
 import { cn } from '@/lib/utils';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Images, Info, LayoutGrid, Mails, Share2 } from 'lucide-react';
+import { Images, Info, LayoutGrid, MailPlus, Mails, Share2 } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppearanceToggleTab from './appearance-tabs';
 
@@ -49,7 +49,12 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Mails',
+        title: 'Recipient Emails',
+        href: route('dashboard.emails'),
+        icon: MailPlus,
+    },
+    {
+        title: 'Mailbox',
         href: route('dashboard.mails'),
         icon: Mails,
     },

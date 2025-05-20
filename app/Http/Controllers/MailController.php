@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\WebContactFormMail;
+use App\Models\Email;
 use App\Models\Mail;
 use App\Services\DynamicMailService;
 use App\Services\InfoFormatService;
@@ -33,7 +34,9 @@ class MailController extends Controller
 
         DynamicMailService::apply($info);
         Mail::create($request->all());
-        MailFacade::to(config('mail.from.address'))->send(new WebContactFormMail($request->all(), $info));
+
+        $recipients = Email::all(); // destinataries
+        foreach ($recipients as $recipient) MailFacade::to($recipient->email)->send(new WebContactFormMail($request->all(), $info));
         return back();
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Email;
 use App\Models\Image;
 use App\Models\Info;
 use App\Models\Mail;
@@ -65,5 +66,10 @@ class DashboardController extends Controller
     {
         $mails = Mail::all();
         return inertia('dashboard/Mails', compact('mails'));
+    }
+    public function emails()
+    {
+        $emails = Email::all();
+        return inertia('dashboard/Emails', compact('emails'));
     }
 }

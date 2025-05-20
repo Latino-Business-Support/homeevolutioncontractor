@@ -82,3 +82,9 @@ export type ImageT = {
     name: string;
     url: string;
 };
+
+export type EmailT = {
+    id: number;
+    name: string;
+    email: string;
+};
