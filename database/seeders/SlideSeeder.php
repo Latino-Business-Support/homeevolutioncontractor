@@ -12,22 +12,22 @@ class SlideSeeder extends Seeder
     {
         DB::table('slides')->insert([
             [
-                'image' => '1.webp',
-                'title' => 'Building Trust, One {Roof} at a Time',
-                'description' => 'This involves exploration and production (E&P) of oil and natural gas.',
-                'link' => '/services',
+                'image' => 'roofing.webp',
+                'title' => 'Roofing Services',
+                'description' => 'Explore our wide range of roofing services tailored to your needs.',
+                'link' => '/services'
             ],
             [
-                'image' => '2.webp',
-                'title' => 'Quality {Roofing Solutions} for Every Home',
-                'description' => 'This involves exploration and production (E&P) of oil and natural gas.',
-                'link' =>  '/services',
+                'image' => 'roofing_repairs.webp',
+                'title' => 'Roofing Repairs + Maintenance',
+                'description' => 'Get your roof repaired by our expert team to ensure safety and durability.',
+                'link' => '/services/roofing-repairs-maintenance'
             ],
             [
-                'image' => '3.webp',
-                'title' => 'Your Trusted Partner in {Home Renovations}',
-                'description' => 'This involves exploration and production (E&P) of oil and natural gas.',
-                'link' =>  '/services',
+                'image' => 'gutter.webp',
+                'title' => 'Gutter Replacement & Repairs',
+                'description' => 'We offer professional gutter replacement and repair services to protect your home.',
+                'link' => '/services/gutter-replacement-repairs'
             ],
         ]);
     }
