@@ -1,5 +1,5 @@
 import { InfoT } from '@/types';
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { ArrowUpRight, Mail, MapPin, Phone } from 'lucide-react';
 import Button from './Button';
 
@@ -9,7 +9,9 @@ export default function HeaderTop() {
     return (
         <div className="hidden px-5 py-3 sm:block">
             <div className="container mx-auto flex justify-between">
-                <img src={info.logo} alt={'Logo of ' + info.name} className="hidden h-13 lg:block" />
+                <Link href={route('home')}>
+                    <img src={info.logo} alt={'Logo of ' + info.name} className="hidden h-15 lg:block" />
+                </Link>
                 <div className="flex flex-1 items-center gap-5 lg:justify-center">
                     <Item title="Call us any time" subtitle={info.phone} icon={Phone} href={'tel:' + info.phone} />
                     <Item title="Company Location" subtitle={info.address} icon={MapPin} href={info.google_place} />
