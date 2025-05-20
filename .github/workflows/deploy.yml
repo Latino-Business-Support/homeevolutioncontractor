@@ -6,8 +6,8 @@ on:
     branches:
       - master
 env:
-  APP_DOMAIN: 'homeevolutioncontractor.ideasoft.site'
-  SERVER_DIR: '/public_html/homeevolutioncontractor.ideasoft.site'
+  APP_DOMAIN: 'homeevolutioncontractor.com'
+  SERVER_DIR: '/domains/homeevolutioncontractor.com/public_html'
 
 concurrency:
   group: deploy
@@ -58,7 +58,7 @@ jobs:
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{secrets.FTP_DOMAIN}}
-          username: ${{secrets.DB_USERNAME}}
-          password: ${{secrets.DB_PASSWORD}}
+          username: ${{secrets.FTP_USERNAME}}
+          password: ${{secrets.FTP_PASSWORD}}
           local-dir: ./
           server-dir: ${{env.SERVER_DIR}}/
