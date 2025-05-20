@@ -34,7 +34,7 @@ export default function SingleService({ service, variant = 'primary' }: { servic
                     <div className="flex flex-1 flex-col justify-between gap-5">
                         <p className="text-foreground/70 line-clamp-3">{service.description}</p>
                         <div className="mt-auto">
-                            <Button label="View Details" icon={ArrowRight} />
+                            <Button as={Link} href={route('service', service.slug)} label="View Details" icon={ArrowRight} />
                         </div>
                     </div>
                 )}
