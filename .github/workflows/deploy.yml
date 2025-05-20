@@ -7,7 +7,7 @@ on:
       - master
 env:
   APP_DOMAIN: 'homeevolutioncontractor.com'
-  SERVER_DIR: '/domains/homeevolutioncontractor.com/public_html'
+  SERVER_DIR: '/public_html'
 
 concurrency:
   group: deploy
