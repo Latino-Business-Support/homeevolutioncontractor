@@ -1,4 +1,4 @@
-import { asset } from '@/lib/utils';
+import { asset, cn } from '@/lib/utils';
 import type { InfoT, ServiceT, SocialT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 
@@ -32,6 +32,7 @@ export default function Footer() {
                             <Item text="Our Projects" href={route('projects')} />
                             <Item text="Faq's" href={route('faqs')} />
                             <Item text="Contact Us" href={route('contact')} />
+                            <Item text="Dashboard" href={route('dashboard.home')} />
                         </ul>
                     </div>
                     <div className="mx-auto flex flex-col gap-10">
@@ -46,7 +47,15 @@ export default function Footer() {
                         <Title text="Social Media" />
                         <ul className="flex flex-col gap-3">
                             {socials.map((social) => (
-                                <Item key={social.id} as="a" text={social.name} target="_blank" rel="noreferrer noopener" href={social.link} />
+                                <Item
+                                    key={social.id}
+                                    as="a"
+                                    text={social.name}
+                                    target="_blank"
+                                    rel="noreferrer noopener"
+                                    href={social.link}
+                                    isSocial={true}
+                                />
                             ))}
                         </ul>
                     </div>
@@ -59,14 +68,23 @@ export default function Footer() {
 function Item({
     as = Link,
     text,
+    isSocial = false,
     ...props
 }: {
     as?: React.ElementType;
     text: string;
+    isSocial?: boolean;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+    const isActive = isSocial ? false : new URL(props.href).pathname === new URL(window.location.href).pathname;
     const Component = as;
+
     return (
-        <Component className="hover:text-c1 text-white/50" {...props}>
+        <Component
+            className={cn('hover:text-c1 text-white/50', {
+                hidden: isActive,
+            })}
+            {...props}
+        >
             {text}
         </Component>
     );
