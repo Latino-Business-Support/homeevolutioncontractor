@@ -9,10 +9,10 @@ export default function Breadcrumbs({ title, paths }: { title: string; paths: { 
         <section className="animate-in fade-in-0 relative overflow-hidden px-5 py-30 duration-500">
             <img
                 className="absolute inset-0 z-[1] h-full w-full object-cover brightness-75 dark:[mask-image:linear-gradient(transparent,black,transparent)]"
-                src={asset('img/info/bg3.webp')}
+                src={asset('img/info/bg2.webp')}
                 alt="Shape 2"
             />
-            {/* <div className="bg-c3/20 absolute inset-0 z-[2] dark:[mask-image:linear-gradient(transparent,black,transparent)]" /> */}
+            <div className="bg-c3/50 absolute inset-0 z-[2] dark:[mask-image:linear-gradient(transparent,black,transparent)]" />
             <div className="relative z-[3] container mx-auto flex flex-col items-center justify-center gap-2">
                 <h1 className="font-c2 text-5xl font-bold text-white">{title}</h1>
                 <nav className="mt-5 flex items-center gap-1 text-xl text-white">

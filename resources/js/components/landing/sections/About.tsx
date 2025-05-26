@@ -17,7 +17,7 @@ export default function About({ className = '', id = '', isVisible }) {
                     })}
                 >
                     <div className="w-full overflow-hidden rounded-tl-[100px] rounded-br-[100px]">
-                        <img src={asset('img/info/bg2.webp')} alt="Refinería industrial" className="aspect-video w-full object-cover" />
+                        <img src={asset('img/info/bg4.webp')} alt="Refinería industrial" className="aspect-video w-full object-cover" />
                     </div>
                 </div>
                 <div
