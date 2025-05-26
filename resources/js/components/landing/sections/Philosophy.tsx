@@ -41,27 +41,12 @@ export function Philosophy({ className = '', id = '', isVisible }) {
                     <Title titleIcon={Target} title="Our Philosophy" subtitle="What {Defines} Us" />
                 </div>
 
-                <Tabs defaultValue="mission" className="w-full">
+                <Tabs defaultValue="values" className="w-full">
                     <TabOptions>
+                        <SingleTab name="Values" value="values" icon={Heart} />
                         <SingleTab name="Mission" value="mission" icon={Target} />
                         <SingleTab name="Vision" value="vision" icon={LightbulbIcon} />
-                        <SingleTab name="Values" value="values" icon={Heart} />
                     </TabOptions>
-
-                    <MisioVision
-                        value="mission"
-                        icon={Target}
-                        title="Our Mission"
-                        description="To design and build high-quality, innovative, and sustainable construction projects that meet the unique needs of our clients. We are dedicated to delivering excellence, fostering trust, and creating spaces that inspire and endure."
-                    />
-
-                    <MisioVision
-                        value="vision"
-                        icon={LightbulbIcon}
-                        title="Our Vision"
-                        description="To be a leading construction company recognized for our commitment to quality, innovation, and sustainability. We aim to shape the future of construction by creating impactful projects that enhance communities and improve lives."
-                    />
-
                     <TabContent value="values" classWrap="grid grid-cols-1 gap-6 lg:grid-cols-3 border-0 p-0 dark:bg-transparent backdrop-blur-none">
                         {companyValues.map((value, index) => (
                             <motion.div
@@ -80,6 +65,18 @@ export function Philosophy({ className = '', id = '', isVisible }) {
                             </motion.div>
                         ))}
                     </TabContent>
+                    <MisioVision
+                        value="mission"
+                        icon={Target}
+                        title="Our Mission"
+                        description="To design and build high-quality, innovative, and sustainable construction projects that meet the unique needs of our clients. We are dedicated to delivering excellence, fostering trust, and creating spaces that inspire and endure."
+                    />
+                    <MisioVision
+                        value="vision"
+                        icon={LightbulbIcon}
+                        title="Our Vision"
+                        description="To be a leading construction company recognized for our commitment to quality, innovation, and sustainability. We aim to shape the future of construction by creating impactful projects that enhance communities and improve lives."
+                    />
                 </Tabs>
             </div>
         </section>
