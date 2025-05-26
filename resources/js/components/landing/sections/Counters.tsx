@@ -2,10 +2,10 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 const stats = [
-    { value: 20, label: 'Completed Projects' },
-    { value: 20, label: 'Satisfied Clients' },
-    { value: 4, label: 'Team Professionals' },
-    { value: 5, label: 'Years of Experience' },
+    { value: 200, label: 'Completed Projects' },
+    { value: 200, label: 'Satisfied Clients' },
+    { value: 8, label: 'Team Professionals' },
+    { value: 9, label: 'Years of Experience' },
 ];
 
 export function Counters({ className = '', id = '', isVisible }) {
