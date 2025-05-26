@@ -17,7 +17,7 @@ export default function HeaderTop() {
                     <Item title="Company Location" subtitle={info.address} icon={MapPin} href={info.google_place} />
                     <Item title="Your Email " subtitle={info.email} icon={Mail} href={'mailto:' + info.email} />
                 </div>
-                <Button className="py-2" label="GET A QUOTE" icon={ArrowUpRight} />
+                <Button as={Link} href={route('contact')} className="py-2" label="GET A QUOTE" icon={ArrowUpRight} />
             </div>
         </div>
     );
