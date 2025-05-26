@@ -52,10 +52,10 @@ class DashboardController extends Controller
         $images = Image::all();
         return inertia('dashboard/ServicePage', compact('service', 'images'));
     }
-    public function projects()
+    public function gallery()
     {
         $projects = Project::all();
-        return inertia('dashboard/Projects', compact('projects'));
+        return inertia('dashboard/Gallery', compact('projects'));
     }
     public function service_faqs(Service $service)
     {

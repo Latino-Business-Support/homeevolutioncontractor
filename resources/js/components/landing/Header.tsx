@@ -27,7 +27,7 @@ export default function Header() {
                                 <img className="w-full lg:hidden" src={info.logo} alt={'Logo of ' + info.name} />
                                 <NavOption href={route('home')} label="Home" />
                                 <NavOption href={route('services')} label="Services" />
-                                <NavOption href={route('projects')} label="Projects" />
+                                <NavOption href={route('gallery')} label="Gallery" />
                                 <NavOption href={route('faqs')} label="Faq's" />
                                 <NavOption href={route('contact')} label="Contact" />
                                 <NavOption href={route('about')} label="About" />

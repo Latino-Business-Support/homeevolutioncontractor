@@ -44,9 +44,9 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Projects',
-        href: route('dashboard.projects'),
-        icon: LayoutGrid,
+        title: 'Gallery',
+        href: route('dashboard.gallery'),
+        icon: Images,
     },
     {
         title: 'Recipient Emails',

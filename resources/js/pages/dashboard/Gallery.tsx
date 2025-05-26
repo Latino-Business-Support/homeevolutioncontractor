@@ -5,12 +5,12 @@ import useCrud from '@/hooks/dashboard/useCrud';
 import AppLayout from '@/layouts/app-layout';
 import type { ProjectT } from '@/types';
 
-export default function Projects({ projects }: { projects: ProjectT[] }) {
+export default function Gallery({ projects }: { projects: ProjectT[] }) {
     const { addField, modeForm, setModeForm, handleSubmit, showModal, setDeleteMode, handleDelete } = useCrud({ resource: 'crud-projects' });
     // console.log(data);
 
     return (
-        <AppLayout title="Images" breadcrumbs={[{ title: 'Images', href: route('dashboard.images') }]}>
+        <AppLayout title="Gallery" breadcrumbs={[{ title: 'Gallery', href: route('dashboard.gallery') }]}>
             <section className="flex h-full flex-1 flex-col gap-4 rounded-xl p-5">
                 <div className="container mx-auto">
                     <GridImages isShow={!modeForm} projects={projects} onClickDelete={setDeleteMode} onClickNew={setModeForm()} />

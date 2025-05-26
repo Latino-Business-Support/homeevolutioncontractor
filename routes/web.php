@@ -26,7 +26,7 @@ Route::get('/', [LandingController::class, 'home'])->name('home');
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/services', [LandingController::class, 'services'])->name('services');
 Route::get('/services/{slug}', [LandingController::class, 'service'])->name('service');
-Route::get('/projects', [LandingController::class, 'projects'])->name('projects');
+Route::get('/gallery', [LandingController::class, 'gallery'])->name('gallery');
 Route::get('/faqs', [LandingController::class, 'faqs'])->name('faqs');
 Route::get('/contact', [LandingController::class, 'contact'])->name('contact');
 
@@ -42,7 +42,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
     Route::get('/services', [DashboardController::class, 'services'])->name('services');
     Route::get('/services/{service}/page', [DashboardController::class, 'service_page'])->name('service_page');
     Route::get('/services/{service}/faqs', [DashboardController::class, 'service_faqs'])->name('service_faqs');
-    Route::get('/projects', [DashboardController::class, 'projects'])->name('projects');
+    Route::get('/gallery', [DashboardController::class, 'gallery'])->name('gallery');
     Route::get('/mails', [DashboardController::class, 'mails'])->name('mails');
     Route::get('/emails', [DashboardController::class, 'emails'])->name('emails');
 

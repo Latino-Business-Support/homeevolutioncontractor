@@ -44,13 +44,13 @@ class LandingController extends Controller
         return inertia('landing/Service', compact('services', 'service', 'socials'));
     }
 
-    public function projects()
+    public function gallery()
     {
         $socials = Social::all();
         $services = Service::all();
         $projects = Project::all();
         $reviews = GoogleReviewService::all();
-        return inertia('landing/Projects', compact('services', 'projects', 'socials', 'reviews'));
+        return inertia('landing/Gallery', compact('services', 'projects', 'socials', 'reviews'));
     }
 
     public function faqs()

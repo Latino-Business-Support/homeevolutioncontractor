@@ -3,7 +3,7 @@ import Title from '@/components/landing/Title';
 import { cn } from '@/lib/utils';
 import type { ProjectT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { FolderOpen } from 'lucide-react';
+import { Images } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
@@ -20,7 +20,7 @@ export default function Projects({ className = '', id = '', isVisible }) {
                     'translate-y-0 opacity-100': isVisible,
                 })}
             >
-                <Title titleIcon={FolderOpen} title="Latest Projects" subtitle="{Latest Projects} Our Project Showcase" />
+                <Title titleIcon={Images} title="Our gallery" subtitle="Explore our {gallery}" />
                 <div className="pt-10">
                     <Swiper
                         modules={[Keyboard, Autoplay, Pagination]}
@@ -51,7 +51,7 @@ export default function Projects({ className = '', id = '', isVisible }) {
                         ))}
                     </Swiper>
                 </div>
-                <Button as={Link} label="See All Projects" className="mx-auto mt-12" href={route('projects')} />
+                <Button as={Link} label="See All Gallery" className="mx-auto mt-12" href={route('gallery')} />
             </div>
         </section>
     );

@@ -6,17 +6,17 @@ import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Projects({ projects }: { projects: ProjectT[] }) {
+export default function Gallery({ projects }: { projects: ProjectT[] }) {
     const { isVisible } = useSectionsIntersection({ classId: 'section' });
     const [selectedProject, setSelectedProject] = useState<ProjectT | null>(null);
     const handleProjectClick = (image: ProjectT | null) => () => setSelectedProject(image);
 
     return (
         <LandingLayout
-            title="Projects"
+            title="Gallery"
             paths={[
                 { name: 'Home', href: route('home') },
-                { name: 'Projects', href: route('projects') },
+                { name: 'Gallery', href: route('gallery') },
             ]}
         >
             <section className="px-5 py-5">
