@@ -76,7 +76,7 @@ function Input({
                     className={cn(
                         'peer focus:border-c1 focus:ring-c1 border-c1/10 dark:focus:border-c1 field-sizing-content w-full resize-none rounded border bg-transparent px-4 py-3 pt-7 placeholder-transparent transition-all focus:ring-1 focus:outline-none',
                         { 'field-sizing-content min-h-20 resize-none': as === 'textarea' },
-                        { 'border-c1/20': invert },
+                        { 'border-white/20': invert },
                     )}
                     type={type}
                     autoComplete="off"
