@@ -1,3 +1,5 @@
+import Reviews from '@/components/landing/sections/Reviews';
+import useSectionsIntersection from '@/hooks/landing/use-sections-intersection';
 import LandingLayout from '@/layouts/LandingLayout';
 import type { ProjectT } from '@/types';
 import { motion } from 'framer-motion';
@@ -5,6 +7,7 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 
 export default function Projects({ projects }: { projects: ProjectT[] }) {
+    const { isVisible } = useSectionsIntersection({ classId: 'section' });
     const [selectedProject, setSelectedProject] = useState<ProjectT | null>(null);
     const handleProjectClick = (image: ProjectT | null) => () => setSelectedProject(image);
 
@@ -36,6 +39,7 @@ export default function Projects({ projects }: { projects: ProjectT[] }) {
                     </motion.div>
                 </div>
             </section>
+            <Reviews className="section" id="section-reviews" isVisible={isVisible['section-reviews']} />
 
             {selectedProject && (
                 <motion.section
