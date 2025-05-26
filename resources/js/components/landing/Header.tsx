@@ -26,11 +26,11 @@ export default function Header() {
                             <ul className={cn('flex flex-col items-start gap-5', 'lg:flex-row lg:items-center')}>
                                 <img className="w-full lg:hidden" src={info.logo} alt={'Logo of ' + info.name} />
                                 <NavOption href={route('home')} label="Home" />
-                                <NavOption href={route('about')} label="About" />
                                 <NavOption href={route('services')} label="Services" />
                                 <NavOption href={route('projects')} label="Projects" />
                                 <NavOption href={route('faqs')} label="Faq's" />
                                 <NavOption href={route('contact')} label="Contact" />
+                                <NavOption href={route('about')} label="About" />
                             </ul>
                             <ul className="flex items-center gap-5">
                                 <span className="hidden lg:inline">Social Media:</span>

@@ -27,11 +27,11 @@ export default function Footer() {
                         <Title text="Quick links" />
                         <ul className="flex flex-col gap-3">
                             <Item text="Home" href={route('home')} />
-                            <Item text="About Us" href={route('about')} />
                             <Item text="Our Services" href={route('services')} />
                             <Item text="Our Projects" href={route('projects')} />
                             <Item text="Faq's" href={route('faqs')} />
                             <Item text="Contact Us" href={route('contact')} />
+                            <Item text="About Us" href={route('about')} />
                             <Item text="Dashboard" href={route('dashboard.home')} />
                         </ul>
                     </div>
