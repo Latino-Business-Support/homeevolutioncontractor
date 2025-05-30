@@ -10,7 +10,7 @@ export default function Emails({ emails }: { emails: EmailT[] }) {
     const { addField, modeForm, setModeForm, handleSubmit, showModal, setDeleteMode, handleDelete } = useCrud({ resource: 'crud-emails' });
 
     return (
-        <AppLayout title="Socials" breadcrumbs={[{ title: 'Emails', href: route('dashboard.emails') }]}>
+        <AppLayout title="Emails" breadcrumbs={[{ title: 'Emails', href: route('dashboard.emails') }]}>
             <section className="flex h-full flex-1 flex-col gap-4 rounded-xl p-5">
                 <div className="container mx-auto">
                     <Table
