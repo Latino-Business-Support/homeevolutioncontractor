@@ -42,10 +42,10 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: Cache Composer dependencies
+      - name: Cache Composer
         uses: actions/cache@v3
         with:
-          path: ~/.composer/cache
+          path: ~/.cache/composer
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
           restore-keys: |
             ${{ runner.os }}-composer-
