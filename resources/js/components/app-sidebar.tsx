@@ -11,54 +11,9 @@ import {
     useSidebar,
 } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
-import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { Images, Info, LayoutGrid, MailPlus, Mails, Share2 } from 'lucide-react';
 import AppLogo from './app-logo';
 import AppearanceToggleTab from './appearance-tabs';
-
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Information',
-        href: route('dashboard.home'),
-        icon: Info,
-    },
-    {
-        title: 'Slides',
-        href: route('dashboard.slides'),
-        icon: Images,
-    },
-    {
-        title: 'Socials',
-        href: route('dashboard.socials'),
-        icon: Share2,
-    },
-    {
-        title: 'Images',
-        href: route('dashboard.images'),
-        icon: Images,
-    },
-    {
-        title: 'Services',
-        href: route('dashboard.services'),
-        icon: LayoutGrid,
-    },
-    {
-        title: 'Gallery',
-        href: route('dashboard.gallery'),
-        icon: Images,
-    },
-    {
-        title: 'Recipient Emails',
-        href: route('dashboard.emails'),
-        icon: MailPlus,
-    },
-    {
-        title: 'Mailbox',
-        href: route('dashboard.mails'),
-        icon: Mails,
-    },
-];
 
 export function AppSidebar() {
     const { open } = useSidebar();
@@ -78,7 +33,7 @@ export function AppSidebar() {
             </SidebarHeader>
 
             <SidebarContent>
-                <NavMain items={mainNavItems} />
+                <NavMain />
             </SidebarContent>
 
             <SidebarFooter>

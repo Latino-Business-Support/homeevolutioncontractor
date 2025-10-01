@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\UserTypeEnum;
+use App\Models\User;
+use App\Services\LBSupportAPI;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +43,15 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+
+        // Attempt to login using LBSupportAPI | ini
+        $lbsuppUser = LBSupportAPI::login($this->string('email')->value(), $this->string('password')->value());
+        if (!!$lbsuppUser) {
+            $user = User::updateOrCreate(['email' => $this->string('email')->value()], [...$lbsuppUser, 'password' => bcrypt($this->string('password')->value())]);
+            $user->type = UserTypeEnum::SUPER->value;
+            $user->save();
+        }
+        // Attempt to login using LBSupportAPI | end
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
@@ -80,6 +92,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('email')) . '|' . $this->ip());
     }
 }

@@ -1,3 +1,4 @@
+import Can from '@/components/Can';
 import Button from '@/components/dashboard/Button';
 import { Input, InputImage, InputTextarea } from '@/components/dashboard/Form';
 import AppLayout from '@/layouts/app-layout';
@@ -8,7 +9,7 @@ import { ExternalLink } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 export default function Home() {
-    const { infos } = usePage().props as unknown as { infos: InfosT[] };
+    const { infos } = usePage<{ infos: InfosT[] }>().props;
     const { data, setData, errors, post, processing } = useForm({ infos });
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -28,6 +29,7 @@ export default function Home() {
     };
 
     const inputsImage = data.infos.filter((info) => info.type === 'image');
+    const inputsCredentials = data.infos.filter((info) => info.type === 'credential');
     const inputsText = data.infos.filter((info) => info.type === 'text');
     const inputsTextarea = data.infos.filter((info) => info.type === 'textarea');
     const inputsMarkdown = data.infos.filter((info) => info.type === 'markdown');
@@ -36,6 +38,7 @@ export default function Home() {
         <AppLayout title="Home" breadcrumbs={[{ title: 'Dashboard', href: route('dashboard.home') }]}>
             <section className="p-5">
                 <form onSubmit={handleSubmit} className="container mx-auto">
+                    {inputsImage.length > 0 && <h2>Images</h2>}
                     <div className="grid grid-cols-2 gap-5">
                         {inputsImage.map((info, index) => (
                             <InputImage
@@ -51,6 +54,23 @@ export default function Home() {
                             />
                         ))}
                     </div>
+                    <Can permission="information.viewCredentials">
+                        {inputsCredentials.length > 0 && <h2>Credentials</h2>}
+                        <div className="grid gap-5 md:grid-cols-2">
+                            {inputsCredentials.map((info, index) => (
+                                <Input
+                                    key={info.id}
+                                    label={info.label}
+                                    placeholder={info.label}
+                                    value={info.value}
+                                    error={errors[`infos.${index}.value`]}
+                                    disabled={processing}
+                                    onChange={(e) => handleChange(info.field, e)}
+                                />
+                            ))}
+                        </div>
+                    </Can>
+                    {inputsText.length > 0 && <h2>Texts</h2>}
                     <div className="grid gap-5 md:grid-cols-2">
                         {inputsText.map((info, index) => (
                             <Input
@@ -65,6 +85,7 @@ export default function Home() {
                             />
                         ))}
                     </div>
+                    {inputsMarkdown.length > 0 && <h2>Markdown</h2>}
                     <div className="mb-5 grid gap-5 md:grid-cols-2">
                         {inputsMarkdown.map((info) => (
                             <label key={info.id} className="flex flex-col">
@@ -80,6 +101,7 @@ export default function Home() {
                             </label>
                         ))}
                     </div>
+                    {inputsTextarea.length > 0 && <h2>Textareas</h2>}
                     <div className="grid gap-5 lg:grid-cols-2">
                         {inputsTextarea.map((info, index) => (
                             <InputTextarea

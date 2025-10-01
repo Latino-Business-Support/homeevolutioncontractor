@@ -15,6 +15,7 @@ class MigrateProd extends Command
 
     public function handle()
     {
+        return $this->info('This command is disabled for safety reasons.'); // Deshabilitado por razones de seguridad
         // Cambiar configuración en tiempo de ejecución
         Config::set('database.connections.mysql.connection', env('PROD_DB_CONNECTION'));
         Config::set('database.connections.mysql.host', env('PROD_DB_HOST'));

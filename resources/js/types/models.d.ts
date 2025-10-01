@@ -21,6 +21,8 @@ export type InfoT = {
     captcha_site_key: string;
     map: string;
     history: string;
+    lbsupp_api_url: string;
+    lbsupp_api_key: string;
 };
 
 export type ServiceFaqT = {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\PolicyMap;
 use App\Http\Controllers\Controller;
 use App\Models\Email;
 use App\Models\Image;
@@ -17,7 +18,9 @@ class DashboardController extends Controller
 {
     public function home()
     {
-        [$infos, $info] = InfoFormatService::format();
+        [$infos, $info] = InfoFormatService::format(null, PolicyMap::permission('information.viewCredentials'));
+        [, $info_tmp] = InfoFormatService::format(null, true);
+        $info['lbsupp_api_url'] = $info_tmp['lbsupp_api_url'] ?? null;
         return inertia('dashboard/Home', compact('infos', 'info'));
     }
 
@@ -71,5 +74,13 @@ class DashboardController extends Controller
     {
         $emails = Email::all();
         return inertia('dashboard/Emails', compact('emails'));
+    }
+    public function tickets()
+    {
+        [, $info1] = InfoFormatService::format(null, true);
+        [, $info] = InfoFormatService::format(null);
+        $info['lbsupp_api_url'] = $info1['lbsupp_api_url'] ?? null;
+        $info['lbsupp_api_key'] = $info1['lbsupp_api_key'] ?? null;
+        return inertia('dashboard/Tickets', compact('info'));
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Services\InfoFormatService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,9 +19,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(Request $request): Response
     {
+        [, $info1] = InfoFormatService::format(null, true);
+        [, $info] = InfoFormatService::format(null);
+        $info['lbsupp_api_url'] = $info1['lbsupp_api_url'] ?? null;
+        $info['lbsupp_api_key'] = $info1['lbsupp_api_key'] ?? null;
         return Inertia::render('auth/login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => $request->session()->get('status'),
+            'info' => $info,
         ]);
     }
 

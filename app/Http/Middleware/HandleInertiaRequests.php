@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Helpers\PolicyMap;
 use App\Services\InfoFormatService;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
@@ -35,6 +36,7 @@ class HandleInertiaRequests extends Middleware
                 'location' => $request->url(),
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'permissions' => PolicyMap::permissions(),
             'info' => $info,
         ];
     }

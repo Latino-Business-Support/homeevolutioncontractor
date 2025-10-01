@@ -2,7 +2,7 @@ import { useAppearance } from '@/hooks/use-appearance';
 import { cn } from '@/lib/utils';
 import type { InfoT, SocialT } from '@/types';
 import { Link, usePage } from '@inertiajs/react';
-import { Menu, Monitor, Moon, Sun, X } from 'lucide-react';
+import { Menu, Monitor, Moon, Sun, User, X } from 'lucide-react';
 import { useState } from 'react';
 import { ComponentIcon } from './ComponentIcon';
 
@@ -37,6 +37,7 @@ export default function Header() {
                                 {socials.map((social) => (
                                     <SocialOption key={social.id} href={social.link} icon={social.icon} />
                                 ))}
+                                <SocialOption href={route('dashboard.home')} icon={User} target="_self" />
                             </ul>
                         </nav>
                         <div
@@ -70,10 +71,10 @@ function NavOption({ href, label }) {
     );
 }
 
-function SocialOption({ href, icon }) {
+function SocialOption({ href, icon, target = '_blank' }) {
     return (
         <li>
-            <a href={href} target="_blank" rel="noopener noreferrer">
+            <a href={href} target={target} rel="noopener noreferrer">
                 <ComponentIcon icon={icon} size={18} />
             </a>
         </li>
