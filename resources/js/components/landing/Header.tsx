@@ -26,21 +26,30 @@ export default function Header() {
                             )}
                         >
                             <ul className={cn('flex flex-col items-start gap-5', 'lg:flex-row lg:items-center')}>
-                                <img className="w-full lg:hidden" src={info.logo} alt={'Logo of ' + info.name} />
+                                <li className="w-full lg:hidden">
+                                    <img className="w-full" src={info.logo} alt={'Logo of ' + info.name} />
+                                </li>
                                 <NavOption href={route('home')} label="Home" />
                                 <NavOption href={route('services')} label="Services" />
                                 <NavOption href={route('gallery')} label="Gallery" />
                                 <NavOption href={route('faqs')} label="Faq's" />
-                                <NavOption href={route('contact')} label="Contact" />
                                 <NavOption href={route('about')} label="About" />
+                                <NavOption href={route('contact')} label="Contact" />
                             </ul>
-                            <ul className="flex items-center gap-5">
+                            <div className="flex items-center gap-5">
                                 <span className="hidden lg:inline">Social Media:</span>
-                                {socials.map((social) => (
-                                    <SocialOption key={social.id} href={social.link} icon={social.icon} />
-                                ))}
-                                <SocialOption href={route('dashboard.home')} icon={faUser} target="_self" />
-                            </ul>
+                                <ul className="flex items-center gap-3">
+                                    {socials.map((social) => (
+                                        <SocialOption
+                                            key={social.id}
+                                            href={social.link}
+                                            icon={social.icon}
+                                            aria-label={`Follow us on ${social.name}`}
+                                        />
+                                    ))}
+                                    <SocialOption href={route('dashboard.home')} icon={faUser} target="_self" aria-label="Dashboard" />
+                                </ul>
+                            </div>
                         </nav>
                         <div
                             className={cn('fixed inset-0 bg-white/10 backdrop-blur-sm lg:hidden dark:bg-black/10', { hidden: !open })}
@@ -67,16 +76,16 @@ function NavOption({ href, label }) {
     const isActive = path1 === path2;
 
     return (
-        <li className={cn('durations-300 hover:text-c1 font-semibold transition-colors', { 'text-c1': isActive })}>
+        <li className={cn('durations-300 font-semibold transition-colors hover:text-red-500', { 'text-red-500': isActive })}>
             <Link href={href}>{label}</Link>
         </li>
     );
 }
 
-function SocialOption({ href, icon, target = '_blank' }) {
+function SocialOption({ href, icon, target = '_blank', ...props }) {
     return (
         <li>
-            <a href={href} target={target} rel="noopener noreferrer" className="hover:text-c1 transition-colors duration-300">
+            <a href={href} target={target} rel="noopener noreferrer" className="hover:text-c1 transition-colors duration-300" {...props}>
                 <FontAwesomeIcon icon={icon} className="text-sm" />
             </a>
         </li>
@@ -97,6 +106,7 @@ function ButtonApperance({ className = '' }) {
                     updateAppearance('light');
                 }
             }}
+            aria-label="Change appearance mode"
         >
             <Sun
                 size={18}

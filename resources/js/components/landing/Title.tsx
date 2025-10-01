@@ -2,6 +2,7 @@ import { cn } from '@/lib/utils';
 import { LucideIcon } from 'lucide-react';
 
 type TitleProps = {
+    as?: 'div' | 'h1' | 'h2' | 'h3';
     size?: 'md' | 'lg' | 'xl';
     subtitle?: string;
     description?: string;
@@ -12,7 +13,17 @@ type TitleProps = {
     titleIcon?: LucideIcon;
 };
 
-export default function Title({ title, titleIcon, subtitle, description, size = 'lg', className = '', id = '', invert = false }: TitleProps) {
+export default function Title({
+    as: Component = 'div',
+    title,
+    titleIcon,
+    subtitle,
+    description,
+    size = 'lg',
+    className = '',
+    id = '',
+    invert = false,
+}: TitleProps) {
     const Icon = titleIcon || null;
 
     const formatSubtitle = (text?: string) => {
@@ -34,7 +45,7 @@ export default function Title({ title, titleIcon, subtitle, description, size = 
             {title && (
                 <div
                     className={cn(
-                        'text-c1/50 border-c1/20 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium dark:border-white/10 dark:text-white dark:shadow-lg',
+                        'text-c1 border-c1/30 inline-flex items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium dark:border-white/10 dark:text-white dark:shadow-lg',
                         {
                             'border-white/20 text-white/80': invert,
                         },
@@ -46,7 +57,7 @@ export default function Title({ title, titleIcon, subtitle, description, size = 
             )}
 
             {subtitle && (
-                <h1
+                <Component
                     className={cn('font-c2 mb-6 max-w-5xl font-bold text-balance', {
                         'text-xl md:text-2xl lg:text-4xl': size === 'md',
                         'text-2xl md:text-4xl lg:text-5xl': size === 'lg',
@@ -54,7 +65,7 @@ export default function Title({ title, titleIcon, subtitle, description, size = 
                     })}
                 >
                     {formatSubtitle(subtitle)}
-                </h1>
+                </Component>
             )}
             {description && (
                 <p

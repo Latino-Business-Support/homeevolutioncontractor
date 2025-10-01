@@ -1,15 +1,31 @@
 import Reviews from '@/components/landing/sections/Reviews';
 import useSectionsIntersection from '@/hooks/landing/use-sections-intersection';
 import LandingLayout from '@/layouts/LandingLayout';
-import type { ProjectT } from '@/types';
+import type { InfoT, ProjectT } from '@/types';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 
-export default function Gallery({ projects }: { projects: ProjectT[] }) {
+export default function Gallery({ info, projects }: { info: InfoT; projects: ProjectT[] }) {
     const { isVisible } = useSectionsIntersection({ classId: 'section' });
     const [selectedProject, setSelectedProject] = useState<ProjectT | null>(null);
     const handleProjectClick = (image: ProjectT | null) => () => setSelectedProject(image);
+    const schema = {
+        '@type': 'WebPage',
+        '@id': route('gallery'),
+        url: route('gallery'),
+        name: 'Gallery - ' + info.name,
+        '@graph': [
+            ...projects.map((project) => ({
+                '@type': 'ImageObject',
+                name: 'Image ' + project.id,
+                contentUrl: project.image_url,
+                url: project.image_url,
+                thumbnailUrl: project.image_url,
+                description: 'Project image ' + project.id,
+            })),
+        ],
+    };
 
     return (
         <LandingLayout
@@ -18,6 +34,8 @@ export default function Gallery({ projects }: { projects: ProjectT[] }) {
                 { name: 'Home', href: route('home') },
                 { name: 'Gallery', href: route('gallery') },
             ]}
+            metaDescription="Explore our portfolio of completed projects showcasing our commitment to quality craftsmanship and customer satisfaction."
+            schema={schema}
         >
             <section className="px-5 py-5">
                 <div className="container mx-auto">
@@ -28,9 +46,11 @@ export default function Gallery({ projects }: { projects: ProjectT[] }) {
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={handleProjectClick(project)}
+                                aria-label={'View Project Image ' + project.id}
                             >
                                 <motion.img
                                     src={project.image_url}
+                                    alt={'Project Image ' + project.id}
                                     className="aspect-square h-auto w-full rounded-md object-cover shadow-lg"
                                     layoutId={String(project.id)}
                                 />

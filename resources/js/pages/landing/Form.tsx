@@ -10,7 +10,6 @@ import ReCAPTCHA from 'react-google-recaptcha';
 export default function Form({ className = '', invert = false }) {
     const { info } = usePage().props as unknown as { info: InfoT };
     const { addField, processing, handleSubmit, setData, errors } = useCrud({ resource: 'crud-mails', prefix: '' });
-    // const [showModal, setShowModal] = useState(false);
     const recaptchaRef = useRef(null);
 
     return (
@@ -24,10 +23,6 @@ export default function Form({ className = '', invert = false }) {
                     },
                     className,
                 )}
-                // onSubmit={(e) => {
-                //     e.preventDefault();
-                //     setShowModal(true);
-                // }}
             >
                 <Input {...addField('name', 'FullName *')} invert={invert} />
                 <Input {...addField('email', 'Email *')} invert={invert} type="email" />
@@ -41,11 +36,6 @@ export default function Form({ className = '', invert = false }) {
 
                 <Button label="Send Message" icon={ArrowRight} className="w-full justify-center sm:col-span-2" disabled={processing} />
             </form>
-            {/* {showModal &&
-                createPortal(
-                    <ModalFormConfirm handleSubmit={handleSubmit} show={showModal} close={() => setShowModal(false)} isLoading={processing} />,
-                    document.body,
-                )} */}
         </>
     );
 }
@@ -83,7 +73,7 @@ function Input({
                     onChange={(e) => onChange?.(e.target.value)}
                     {...props}
                 />
-                <span className="peer-focus:text-c1 pointer-events-none absolute top-2 left-4 text-xs font-medium transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-400 peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-xs dark:text-zinc-400">
+                <span className="peer-focus:text-c1 pointer-events-none absolute top-2 left-4 text-xs font-medium transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:text-sm peer-placeholder-shown:text-zinc-500 peer-focus:top-2 peer-focus:translate-y-0 peer-focus:text-xs dark:text-zinc-400">
                     {label}
                 </span>
             </div>

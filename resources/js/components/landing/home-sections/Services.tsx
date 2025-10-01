@@ -9,7 +9,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SingleService from '../SingleService';
 
 export default function Services({ className = '', id = '', isVisible }) {
-    const { services } = usePage().props as unknown as { services: ServiceT[] };
+    const { services } = usePage<{ services: ServiceT[] }>().props;
+
     return (
         <section className={cn('px-5 py-20', className)} id={id}>
             <div

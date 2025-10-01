@@ -9,19 +9,19 @@ import Title from '../Title';
 
 const companyValues = [
     {
-        icon: <Heart className="text-c1 h-6 w-6" />,
+        icon: <Heart className="text-c1 size-6" />,
         title: 'Trust',
         description:
             'Trust is the foundation of our work. We build it through transparent communication, reliable service, and craftsmanship. Our goal is to deliver results and foster relationships based on integrity.',
     },
     {
-        icon: <Users className="text-c1 h-6 w-6" />,
+        icon: <Users className="text-c1 size-6" />,
         title: 'Integrity',
         description:
             'Integrity guides everything we do. We act with honesty, ethics, and professionalism, ensuring every project is handled with respect, responsibility, and dedication to delivering outstanding results.',
     },
     {
-        icon: <LightbulbIcon className="text-c1 h-6 w-6" />,
+        icon: <LightbulbIcon className="text-c1 size-6" />,
         title: 'Excellence',
         description:
             'Excellence is our standard. We focus on delivering exceptional results, paying attention to detail, and continuously improving to provide unmatched service and value to our clients.',
@@ -58,7 +58,7 @@ export function Philosophy({ className = '', id = '', isVisible }) {
                                 <Card className="border-c1/10 mx-auto max-w-3xl rounded border p-5 text-center shadow-none dark:border-white/5 dark:bg-white/1 dark:shadow-lg dark:backdrop-blur-lg">
                                     <CardContent className="p-6">
                                         <div className="bg-c1/10 mb-4 w-fit rounded-full p-3">{value.icon}</div>
-                                        <h3 className="mb-2 text-left text-xl font-semibold">{value.title}</h3>
+                                        <span className="mb-2 block text-left text-xl font-semibold">{value.title}</span>
                                         <p className="text-foreground/80 text-left hyphens-auto">{value.description}</p>
                                     </CardContent>
                                 </Card>

@@ -14,7 +14,7 @@ class LandingController extends Controller
     public function home()
     {
         $socials = Social::all();
-        $services = Service::all();
+        $services = Service::with(['faqs'])->get();
         $projects = Project::all();
         $slides = Slide::all();
         $reviews = GoogleReviewService::all();
@@ -38,7 +38,7 @@ class LandingController extends Controller
 
     public function service($slug)
     {
-        $service = Service::where('slug', $slug)->firstOrFail();
+        $service = Service::with(['faqs'])->where('slug', $slug)->firstOrFail();
         $socials = Social::all();
         $services = Service::all();
         return inertia('landing/Service', compact('services', 'service', 'socials'));

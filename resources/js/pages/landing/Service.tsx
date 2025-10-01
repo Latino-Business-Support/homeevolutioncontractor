@@ -1,20 +1,43 @@
 import NavServices from '@/components/landing/NavServices';
 import Title from '@/components/landing/Title';
 import LandingLayout from '@/layouts/LandingLayout';
-import type { ServiceT } from '@/types';
+import type { InfoT, ServiceT } from '@/types';
 import { Link } from '@inertiajs/react';
 import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import Form from './Form';
 
-export default function Service({ services, service }: { services: ServiceT[]; service: ServiceT }) {
+export default function Service({ info, services, service }: { info: InfoT; services: ServiceT[]; service: ServiceT }) {
     const [filtredServices, setFiltredServices] = useState<ServiceT[]>(services);
     const onSearch = (value: string) =>
         setFiltredServices(!value ? services : services.filter((service) => service.name.toLowerCase().includes(value.toLowerCase())));
+    const schema = {
+        '@type': 'WebPage',
+        '@id': route('service', service.slug),
+        url: route('service', service.slug),
+        name: service.name + ' - ' + info.name,
+        description: service.description,
+        '@graph': [
+            {
+                '@type': 'Service Page',
+                name: service.name,
+                serviceType: service.name,
+                provider: { '@id': route('service', service.slug) },
+            },
+            ...service.faqs.map((faq) => ({
+                '@type': 'Question',
+                name: faq.question,
+                acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+            })),
+        ],
+    };
+
     return (
         <LandingLayout
             title="Services"
+            metaDescription={`Experts in ${service.name}. Request your quote instantly.`}
+            schema={schema}
             paths={[
                 { name: 'Home', href: route('home') },
                 { name: 'Services', href: route('services') },

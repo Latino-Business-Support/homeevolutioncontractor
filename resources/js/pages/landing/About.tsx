@@ -10,9 +10,30 @@ import rehypeRaw from 'rehype-raw';
 
 export default function About({ info }: { info: InfoT }) {
     const { isVisible } = useSectionsIntersection({ classId: 'section' });
+    const schema = {
+        '@type': 'WebPage',
+        '@id': route('about'),
+        url: route('about'),
+        name: 'About Us - ' + info.name,
+        '@graph': [
+            { '@type': 'Organization', name: info.name, url: route('home'), logo: info.logo },
+            {
+                '@type': 'AboutPage',
+                mainEntity: {
+                    '@type': 'WebPageElement',
+                    name: 'About Us Section',
+                    description:
+                        'We are passionate about restoring spaces and peace of mind, delivering outstanding results with a focus on quality, care, and customer satisfaction.',
+                },
+            },
+        ],
+    };
+
     return (
         <LandingLayout
             title="About Us"
+            metaDescription="Learn about our mission, vision, and the values that drive us to provide exceptional restoration services."
+            schema={schema}
             paths={[
                 { name: 'Home', href: route('home') },
                 { name: 'About Us', href: route('about') },

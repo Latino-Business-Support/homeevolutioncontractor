@@ -8,13 +8,42 @@ import { Philosophy } from '@/components/landing/sections/Philosophy';
 import Reviews from '@/components/landing/sections/Reviews';
 import useSectionsIntersection from '@/hooks/landing/use-sections-intersection';
 import LandingLayout from '@/layouts/LandingLayout';
+import type { InfoT, ServiceT } from '@/types';
 
-export default function Home() {
+export default function Home({ info, services }: { info: InfoT; services: ServiceT[] }) {
     const { isVisible } = useSectionsIntersection({ classId: 'section' });
+    const schema = {
+        '@type': 'WebPage',
+        '@id': route('home'),
+        url: route('home'),
+        name: 'Inicio - ' + info.name,
+        description: 'Experts in ' + services.map((service) => service.name).join(', ') + '. Request your quote instantly.',
+        '@graph': [
+            ...services.map((service) => ({
+                '@type': 'Service',
+                name: service.name,
+                serviceType: service.name,
+                provider: { '@id': route('service', service.slug) },
+            })),
+            // FAQs
+            {
+                '@type': 'FAQPage',
+                mainEntity: [
+                    ...services.flatMap((service) =>
+                        service.faqs.map((faq) => ({
+                            '@type': 'Question',
+                            name: faq.question,
+                            acceptedAnswer: { '@type': 'Answer', text: faq.answer },
+                        })),
+                    ),
+                ],
+            },
+        ],
+    };
+
     return (
-        <LandingLayout title="Home">
+        <LandingLayout metaDescription={`${info.name} - Your Trusted Partner for Safe and Pristine Home Environments`} schema={schema}>
             <Hero className="section" id="section-hero" isVisible={isVisible['section-hero']} />
-            {/* <Partners /> */}
             <Services className="section" id="section-services" isVisible={isVisible['section-services']} />
             <Philosophy className="section" id="section-philosophy" isVisible={isVisible['section-philosophy']} />
             <Counters className="section" id="section-counters" isVisible={isVisible['section-counters']} />

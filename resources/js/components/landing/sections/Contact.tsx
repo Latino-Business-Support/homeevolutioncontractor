@@ -1,10 +1,14 @@
 import { cn } from '@/lib/utils';
 import Form from '@/pages/landing/Form';
+import type { InfoT } from '@/types';
+import { usePage } from '@inertiajs/react';
 import { Contact2, Mail, MapPin, Phone } from 'lucide-react';
 import { ComponentIcon } from '../ComponentIcon';
 import Title from '../Title';
 
 export default function Contact({ className = '', id = '', isVisible }) {
+    const { info } = usePage<{ info: InfoT }>().props;
+
     return (
         <section className={cn('px-5 py-20', className)} id={id}>
             <div
@@ -37,6 +41,7 @@ export default function Contact({ className = '', id = '', isVisible }) {
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3587.28753664307!2d-76.18639!3d43.054414099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d9f11418e74a9d%3A0xa6c1bab5a646285!2sHome%20Evolution%20Roofing!5e1!3m2!1ses-419!2sec!4v1745278278750!5m2!1ses-419!2sec"
                             className="mt-5 aspect-[6/2] w-full flex-1 rounded border"
+                            title={`${info.name} location on map`}
                             loading="lazy"
                         />
                     </div>

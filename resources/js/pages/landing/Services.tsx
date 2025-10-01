@@ -3,17 +3,32 @@ import SingleService from '@/components/landing/SingleService';
 import Title from '@/components/landing/Title';
 import useSectionsIntersection from '@/hooks/landing/use-sections-intersection';
 import LandingLayout from '@/layouts/LandingLayout';
-import type { ServiceT } from '@/types/models';
-import { usePage } from '@inertiajs/react';
+import type { InfoT, ServiceT } from '@/types/models';
 import { NotebookPen } from 'lucide-react';
 
-export default function Services() {
-    const { services } = usePage().props as unknown as { services: ServiceT[] };
+export default function Services({ info, services }: { info: InfoT; services: ServiceT[] }) {
     const { isVisible } = useSectionsIntersection({ classId: 'section' });
+    const schema = {
+        '@type': 'WebPage',
+        '@id': route('services'),
+        url: route('services'),
+        name: 'Services - ' + info.name,
+        description: 'Experts in ' + services.map((service) => service.name).join(', ') + '. Request your quote instantly.',
+        '@graph': [
+            ...services.map((service) => ({
+                '@type': 'Service',
+                name: service.name,
+                serviceType: service.name,
+                provider: { '@id': route('service', service.slug) },
+            })),
+        ],
+    };
 
     return (
         <LandingLayout
             title="Services"
+            metaDescription="Explore our comprehensive range of restoration services tailored to meet your needs. From roofing to siding, we have you covered."
+            schema={schema}
             paths={[
                 { name: 'Home', href: route('home') },
                 { name: 'Services', href: route('services') },

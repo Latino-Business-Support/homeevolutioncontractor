@@ -10,11 +10,13 @@ interface AppLayoutProps {
 }
 
 export default function ({ title, breadcrumbs, children, ...props }: AppLayoutProps) {
-    const { info } = usePage().props as unknown as { info: InfoT };
+    const { info } = usePage<{ info: InfoT }>().props;
+
     return (
         <>
-            <link rel="shortcut icon" href={info.favicon} type="image/x-icon" />
-            <Head title={title} />
+            <Head title={title ? `${title} - ${info.name} - Dashboard` : info.name}>
+                <link rel="shortcut icon" href={info.favicon} type="image/x-icon" />
+            </Head>
             <AppLayoutTemplate breadcrumbs={breadcrumbs} {...props}>
                 {children}
             </AppLayoutTemplate>

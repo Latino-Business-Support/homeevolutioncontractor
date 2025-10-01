@@ -19,43 +19,45 @@ export default function Footer() {
                             Welcome to consaik, a leader in the industry/sector since With a passion for excellence and a commitment.
                         </span>
                         <div className="text-center">
-                            <h3>We are available</h3>
+                            <span className="block">We are available</span>
                             <span className="text-c1">Mon - Sat : 10:00Am To 07:30Pm</span>
                         </div>
                     </div>
-                    <div className="mx-auto flex flex-col gap-10">
+                    <div className="mx-auto flex flex-col gap-5">
                         <Title text="Quick links" />
                         <ul className="flex flex-col gap-3">
-                            <Item text="Home" href={route('home')} />
-                            <Item text="Services" href={route('services')} />
-                            <Item text="Gallery" href={route('gallery')} />
-                            <Item text="Faq's" href={route('faqs')} />
-                            <Item text="Contact" href={route('contact')} />
-                            <Item text="About" href={route('about')} />
-                            <Item text="Dashboard" href={route('dashboard.home')} />
-                        </ul>
-                    </div>
-                    <div className="mx-auto flex flex-col gap-10">
-                        <Title text="Services" />
-                        <ul className="flex flex-col gap-3">
-                            {services.map((service) => (
-                                <Item key={service.id} text={service.name} href={route('service', service.slug)} />
+                            {[
+                                { text: 'Home', href: route('home') },
+                                { text: 'Services', href: route('services') },
+                                { text: 'Gallery', href: route('gallery') },
+                                { text: "Faq's", href: route('faqs') },
+                                { text: 'Contact', href: route('contact') },
+                                { text: 'About', href: route('about') },
+                                { text: 'Dashboard', href: route('dashboard.home') },
+                            ].map((item, index) => (
+                                <li key={index}>
+                                    <Item text={item.text} href={item.href} />
+                                </li>
                             ))}
                         </ul>
                     </div>
-                    <div className="mx-auto flex flex-col gap-10">
+                    <div className="mx-auto flex flex-col gap-5">
+                        <Title text="Services" />
+                        <ul className="flex flex-col gap-3">
+                            {services.map((service) => (
+                                <li key={service.id}>
+                                    <Item text={service.name} href={route('service', service.slug)} />
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <div className="mx-auto flex flex-col gap-5">
                         <Title text="Social Media" />
                         <ul className="flex flex-col gap-3">
                             {socials.map((social) => (
-                                <Item
-                                    key={social.id}
-                                    as="a"
-                                    text={social.name}
-                                    target="_blank"
-                                    rel="noreferrer noopener"
-                                    href={social.link}
-                                    isSocial={true}
-                                />
+                                <li key={social.id}>
+                                    <Item as="a" text={social.name} target="_blank" rel="noreferrer noopener" href={social.link} isSocial={true} />
+                                </li>
                             ))}
                         </ul>
                     </div>

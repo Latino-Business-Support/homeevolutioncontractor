@@ -51,7 +51,9 @@ export default function Faqs({ className = '', id = '', isVisible }) {
                                             key={faq.id}
                                             className="hover:border-c1 border-c1/10 dark:hover:border-c1/20 relative rounded border p-6 transition-all duration-500 dark:bg-white/3 dark:backdrop-blur-lg"
                                         >
-                                            <h3 className="mb-3 text-left text-lg font-semibold text-[#1d2027] dark:text-white">{faq.question}</h3>
+                                            <span className="mb-3 block text-left text-lg font-semibold text-[#1d2027] dark:text-white">
+                                                {faq.question}
+                                            </span>
                                             <p className="text-left text-zinc-600 dark:text-zinc-300">{faq.answer}</p>
                                         </div>
                                     ))}

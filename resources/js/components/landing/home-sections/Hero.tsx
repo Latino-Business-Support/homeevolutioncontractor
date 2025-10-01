@@ -85,12 +85,12 @@ export default function Hero({ className = '', id = '', isVisible }) {
                 </div>
             </div>
             {/* Slide Indicators */}
-            <div className="absolute bottom-16 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+            <div className="absolute bottom-16 left-1/2 z-10 flex -translate-x-1/2 gap-5">
                 {slides.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => handleDotClick(index)}
-                        className={cn('h-3 w-3 rounded-full bg-white/50 transition-all', {
+                        className={cn('size-3 rounded-full bg-white/50 transition-all', {
                             'scale-125 bg-white': index === currentSlideIndex,
                         })}
                         aria-label={`Go to slide ${index + 1}`}
