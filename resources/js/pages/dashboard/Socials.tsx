@@ -2,17 +2,13 @@ import Button from '@/components/dashboard/Button';
 import ConfirmModal from '@/components/dashboard/ConfirmModal';
 import { Form, Input, InputSelect } from '@/components/dashboard/Form';
 import { Table, Td, TdActions, Th } from '@/components/dashboard/Table';
+import { FontAwesomeIcon } from '@/components/FontAwesomeIcon';
 import useCrud from '@/hooks/dashboard/useCrud';
 import AppLayout from '@/layouts/app-layout';
 import type { SocialT } from '@/types';
-import { usePage } from '@inertiajs/react';
-import * as LucideIcons from 'lucide-react';
 
-export default function Socials() {
-    const { socials } = usePage().props as unknown as { socials: SocialT[] };
-
+export default function Socials({ socials }: { socials: SocialT[] }) {
     const { addField, modeForm, setModeForm, handleSubmit, showModal, setDeleteMode, handleDelete, data } = useCrud({ resource: 'crud-socials' });
-    const Icon = LucideIcons[data.icon] || LucideIcons['Share2'];
 
     return (
         <AppLayout title="Socials" breadcrumbs={[{ title: 'Socials', href: route('dashboard.socials') }]}>
@@ -30,41 +26,53 @@ export default function Socials() {
                             </>
                         }
                         data={socials}
-                        onRow={(item) => {
-                            const Icon = LucideIcons[item.icon] || LucideIcons['Share2'];
-                            return (
-                                <>
-                                    <Td label={String(item.id)} className="w-0" />
-                                    <Td>
-                                        <a href={item.link} target="_blank" rel="noopener noreferrer">
-                                            <Icon />
-                                        </a>
-                                    </Td>
-                                    <Td>
-                                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                                            {item.name}
-                                        </a>
-                                    </Td>
-                                    <TdActions className="w-0">
-                                        <Button label="Edit" onClick={setModeForm(item)} />
-                                        <Button label="Delete" variant="destructive" onClick={setDeleteMode(item)} />
-                                    </TdActions>
-                                </>
-                            );
-                        }}
+                        onRow={(item) => (
+                            <>
+                                <Td label={String(item.id)} className="w-0" />
+                                <Td>
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                                        <FontAwesomeIcon icon={item.icon} />
+                                    </a>
+                                </Td>
+                                <Td>
+                                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                                        {item.name}
+                                    </a>
+                                </Td>
+                                <TdActions className="w-0">
+                                    <Button label="Edit" onClick={setModeForm(item)} />
+                                    <Button label="Delete" variant="destructive" onClick={setDeleteMode(item)} />
+                                </TdActions>
+                            </>
+                        )}
                     />
                     <Form isShow={modeForm} onSubmit={handleSubmit} className="mx-auto flex w-full flex-col">
                         <div className="grid w-full gap-x-5 gap-y-3 md:grid-cols-2">
                             <Input {...addField('name', 'Name')} />
                             <div className="flex gap-5">
-                                <InputSelect {...addField('icon', 'Lucide Icon')} className="flex-1">
-                                    {Object.entries(LucideIcons).map(([key]) => (
-                                        <option key={key} value={key}>
-                                            {key}
-                                        </option>
-                                    ))}
+                                <InputSelect {...addField('icon', 'Icon')} className="flex-1">
+                                    <option value="">Select an Icon</option>
+                                    <option value="faFacebookF">Facebook</option>
+                                    <option value="faYoutube">YouTube</option>
+                                    <option value="faInstagram">Instagram</option>
+                                    <option value="faTiktok">TikTok</option>
+                                    <option value="faXTwitter">X</option>
+                                    <option value="faTwitter">Twitter</option>
+                                    <option value="faLinkedin">LinkedIn</option>
+                                    <option value="faSnapchat">Snapchat</option>
+                                    <option value="faPinterestP">Pinterest</option>
+                                    <option value="faDiscord">Discord</option>
+                                    <option value="faWhatsapp">WhatsApp</option>
+                                    <option value="faTelegram">Telegram</option>
+                                    <option value="faPhone">Phone</option>
+                                    <option value="faMobileScreenButton">Cellphone</option>
+                                    <option value="BBB">Better Business Bureau</option>
+                                    <option value="Nextdoor">Nextdoor</option>
+                                    <option value="Yelp">Yelp</option>
+                                    <option value="HomeAdvisor">Home Advisor</option>
+                                    <option value="Thumbtack">Thumbtack</option>
                                 </InputSelect>
-                                <Icon className="my-auto" style={{ color: data.color }} />
+                                <FontAwesomeIcon className="my-auto" icon={data?.icon} />
                             </div>
                             <Input {...addField('link', 'Link')} type="url" />
                         </div>

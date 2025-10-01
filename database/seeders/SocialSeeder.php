@@ -11,26 +11,10 @@ class SocialSeeder extends Seeder
     public function run(): void
     {
         DB::table('socials')->insert([
-            [
-                'name' => 'Facebook',
-                'icon' => 'Facebook',
-                'link' => '#',
-            ],
-            [
-                'name' => 'Instagram',
-                'icon' => 'Instagram',
-                'link' => '#',
-            ],
-            [
-                'name' => 'Twitter',
-                'icon' => 'Twitter',
-                'link' => '#',
-            ],
-            [
-                'name' => 'LinkedIn',
-                'icon' => 'Linkedin',
-                'link' => '#',
-            ],
+            ['name' => 'Facebook', 'icon' => 'faFacebookF', 'link' => '#'],
+            ['name' => 'Instagram', 'icon' => 'faInstagram', 'link' => '#'],
+            ['name' => 'Twitter', 'icon' => 'faTwitter', 'link' => '#'],
+            ['name' => 'LinkedIn', 'icon' => 'faLinkedinIn', 'link' => '#'],
         ]);
     }
 }

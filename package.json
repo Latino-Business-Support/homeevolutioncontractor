@@ -13,6 +13,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",
+        "@fortawesome/fontawesome-common-types": "^7.0.1",
         "@types/node": "^22.13.5",
         "eslint": "^9.17.0",
         "eslint-config-prettier": "^10.0.1",
@@ -24,6 +25,10 @@
         "typescript-eslint": "^8.23.0"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-svg-core": "^7.0.1",
+        "@fortawesome/free-brands-svg-icons": "^7.0.1",
+        "@fortawesome/free-solid-svg-icons": "^7.0.1",
+        "@fortawesome/react-fontawesome": "^3.0.2",
         "@headlessui/react": "^2.2.0",
         "@inertiajs/react": "^2.0.0",
         "@monaco-editor/react": "^4.7.0",
