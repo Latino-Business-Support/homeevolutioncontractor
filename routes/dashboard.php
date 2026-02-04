@@ -26,6 +26,7 @@ Route::middleware(['auth', 'verified'])->prefix('dashboard')->name('dashboard.')
         Route::get('/mails', 'mails')->name('mails');
         Route::get('/emails', 'emails')->name('emails');
         Route::get('/tickets', 'tickets')->name('tickets');
+        Route::get('/manual', 'manual')->name('manual');
     });
 
     // controllers for crud

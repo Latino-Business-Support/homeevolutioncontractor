@@ -14,6 +14,8 @@ import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
 import AppLogo from './app-logo';
 import AppearanceToggleTab from './appearance-tabs';
+import SidebarNavOption from './sidebar-nav-option';
+import { BookOpenTextIcon, Tag } from 'lucide-react';
 
 export function AppSidebar() {
     const { open } = useSidebar();
@@ -37,6 +39,10 @@ export function AppSidebar() {
             </SidebarContent>
 
             <SidebarFooter>
+                <SidebarMenu>
+                <SidebarNavOption title="Tickets" href={route('dashboard.tickets')} icon={Tag} />
+                <SidebarNavOption title="Manual" href={route('dashboard.manual')} icon={BookOpenTextIcon} />
+            </SidebarMenu>
                 <AppearanceToggleTab
                     variant="sidebar"
                     className={cn({

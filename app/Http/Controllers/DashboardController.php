@@ -83,4 +83,12 @@ class DashboardController extends Controller
         $info['lbsupp_api_key'] = $info1['lbsupp_api_key'] ?? null;
         return inertia('dashboard/Tickets', compact('info'));
     }
+    public function manual()
+    {
+        [, $info1] = InfoFormatService::format(null, true);
+        [, $info] = InfoFormatService::format(null);
+        $info['lbsupp_api_url'] = $info1['lbsupp_api_url'] ?? null;
+        $info['lbsupp_api_key'] = $info1['lbsupp_api_key'] ?? null;
+        return inertia('dashboard/manual', compact('info'));
+    }
 }

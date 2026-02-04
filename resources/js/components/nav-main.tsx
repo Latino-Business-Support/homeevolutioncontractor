@@ -1,7 +1,7 @@
 import { SidebarGroup, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
 import { Link } from '@inertiajs/react';
-import { Images, Info, LayoutGrid, MailPlus, Mails, MessageCircleQuestion, Share2, Tag } from 'lucide-react';
+import { Images, Info, LayoutGrid, MailPlus, Mails, MessageCircleQuestion, Share2 } from 'lucide-react';
 import { useState } from 'react';
 
 export function NavMain() {
@@ -21,10 +21,8 @@ export function NavMain() {
                 <NavOption title="Receivers" href={route('dashboard.emails')} icon={MailPlus} />
                 <NavOption title="Mailbox" href={route('dashboard.mails')} icon={Mails} />
             </SidebarMenu>
-            <SidebarGroupLabel>Latinos Business Support</SidebarGroupLabel>
-            <SidebarMenu>
-                <NavOption title="Tickets" href={route('dashboard.tickets')} icon={Tag} />
-            </SidebarMenu>
+            
+            
         </SidebarGroup>
     );
 }
