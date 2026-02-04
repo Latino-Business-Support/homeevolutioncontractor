@@ -44,3 +44,12 @@ export function WidgetFlyer(props: React.HTMLAttributes<HTMLDivElement>) {
         </div>
     );
 }
+export function WidgetManual(props: React.HTMLAttributes<HTMLDivElement>) {
+   const { apiUrl, apiKey, darkMode, lang } = useWidgets();
+   const Manual = (props: WidgetProps) => React.createElement('x-lbs-manual', props);
+   return (
+       <div {...props}>
+           <Manual apiurl={apiUrl} apikey={apiKey} darkmode={darkMode} lang={lang} />
+       </div>
+  );
+}
