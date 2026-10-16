@@ -17,16 +17,14 @@ class LandingController extends Controller
         $services = Service::with(['faqs'])->get();
         $projects = Project::all();
         $slides = Slide::all();
-        $reviews = GoogleReviewService::all();
-        return inertia('landing/Home', compact('services', 'projects', 'slides', 'socials', 'reviews'));
+        return inertia('landing/Home', compact('services', 'projects', 'slides', 'socials'));
     }
 
     public function about()
     {
         $socials = Social::all();
         $services = Service::all();
-        $reviews = GoogleReviewService::all();
-        return inertia('landing/About', compact('services', 'socials', 'reviews'));
+        return inertia('landing/About', compact('services', 'socials'));
     }
 
     public function services()
@@ -49,8 +47,7 @@ class LandingController extends Controller
         $socials = Social::all();
         $services = Service::all();
         $projects = Project::all();
-        $reviews = GoogleReviewService::all();
-        return inertia('landing/Gallery', compact('services', 'projects', 'socials', 'reviews'));
+        return inertia('landing/Gallery', compact('services', 'projects', 'socials'));
     }
 
     public function faqs()

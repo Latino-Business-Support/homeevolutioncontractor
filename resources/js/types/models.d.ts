@@ -61,16 +61,25 @@ export type SocialT = {
 };
 
 export type ReviewT = {
-    author_name: string;
-    author_url: string;
-    language: string;
-    original_language: string;
-    profile_photo_url: string;
+    name: string;
+    relativePublishTimeDescription: string;
     rating: number;
-    relative_time_description: string;
-    text: string;
-    time: number;
-    translated: boolean;
+    text: {
+        text: string;
+        languageCode: string;
+    };
+    originalText: {
+        text: string;
+        languageCode: string;
+    };
+    authorAttribution: {
+        displayName: string;
+        uri: string;
+        photoUri: string;
+    };
+    publishTime: string;
+    flagContentUri: string;
+    googleMapsUri: string;
 };
 
 export type ProjectT = {

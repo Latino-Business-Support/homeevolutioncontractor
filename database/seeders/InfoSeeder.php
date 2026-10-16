@@ -36,14 +36,14 @@ class InfoSeeder extends Seeder
             ['label' => 'Phone', 'field' => 'phone', 'value' => "+1 (315) 412 6744"],
             ['label' => 'Address', 'field' => 'address', 'value' => "618 N Lowell Ave, Syracuse, NY 13204"],
             ['label' => 'Google Place', 'field' => 'google_place', 'value' => "https://maps.app.goo.gl/nekwfwm4kGWQt2q89"],
-            ['label' => 'Facebook', 'field' => 'facebook', 'value' => "https://www.facebook.com/#"],
+            ['label' => 'Facebook', 'field' => 'facebook', 'value' => "https://facebook.com/profile.php?id=100088835782357"],
             ['label' => 'Captcha Site Key', 'field' => 'captcha_site_key', 'value' => env('CAPTCHA_SITE_KEY', '')],
         ]);
 
         // textareas
         DB::table('infos')->insert([
             ['label' => 'Summary', 'field' => 'summary', 'value' => "At Home Evolution Contractor, our mission is to empower homeowners to achieve their dream living spaces through exceptional craftsmanship and customer satisfaction. Founded on integrity, quality, and community, we deliver top-notch roofing, siding, and gutter services with a personal touch. Our experienced professionals bring expertise and dedication to every project, ensuring seamless execution and stunning results.", 'type' => InfoTypeEnum::TEXTAREA->value],
-            ['label' => 'Iframe Src Map', 'field' => 'map', 'value' => "https://maps.google.com/maps?q=Nico%E2%80%99s%20Roofing%20and%20Cleaning%20Castle%20Hayne%2C%20NC%2028429&t=m&z=10&output=embed&iwloc=near", 'type' => InfoTypeEnum::TEXTAREA->value],
+            ['label' => 'Iframe Src Map', 'field' => 'map', 'value' => "https://google.com/maps/embed?pb=!1m18!1m12!1m3!1d317528.82410737715!2d-76.5683052925714!3d43.490052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa6d3e01436356e09%3A0x8be913e84fafb8c4!2sHome%20Evolution%20Contractor!5e1!3m2!1ses!2sec!4v1792181012444!5m2!1ses!2sec", 'type' => InfoTypeEnum::TEXTAREA->value],
         ]);
 
         // markdowns
