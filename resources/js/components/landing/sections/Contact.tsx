@@ -35,11 +35,11 @@ export default function Contact({ className = '', id = '', isVisible }) {
                             We are available to answer your questions and assist you with your project. Feel free to contact us through any of these
                             means.
                         </p>
-                        <ContactItem icon={MapPin} name="Address" value="618 N Lowell Ave, Syracuse, NY 13204" />
-                        <ContactItem icon={Phone} name="Phone" value="+1 (315) 412-6744" />
-                        <ContactItem icon={Mail} name="Email" value="info@homeevolutioncontractor.com" />
+                        <ContactItem icon={MapPin} name="Address" value={info.address} />
+                        <ContactItem icon={Phone} name="Phone" value={info.phone} />
+                        <ContactItem icon={Mail} name="Email" value={info.email} />
                         <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3587.28753664307!2d-76.18639!3d43.054414099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d9f11418e74a9d%3A0xa6c1bab5a646285!2sHome%20Evolution%20Roofing!5e1!3m2!1ses-419!2sec!4v1745278278750!5m2!1ses-419!2sec"
+                            src={info.map}
                             className="mt-5 aspect-[6/2] w-full flex-1 rounded border"
                             title={`${info.name} location on map`}
                             loading="lazy"

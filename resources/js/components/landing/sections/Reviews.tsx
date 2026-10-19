@@ -77,7 +77,7 @@ function StatsCard() {
                 >
                     <p className="text-sm font-semibold opacity-50">Where do you want to leave a review?</p>
 
-                    <StateBarSubmenuItem href={info.google_place} label="Google">
+                    <StateBarSubmenuItem href={'https://search.google.com/local/writereview?placeid=' + info.google_place_id} label="Google">
                         <GoogleIcon className="h-5 w-5" />
                     </StateBarSubmenuItem>
                     <StateBarSubmenuItem href={info.facebook} label="Facebook">

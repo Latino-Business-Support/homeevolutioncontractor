@@ -21,7 +21,6 @@ class InfoSeeder extends Seeder
         // credentials
         DB::table('infos')->insert([
             ['label' => 'Google Place Api Key', 'field' => 'google_api_key', 'value' => env('GOOGLE_API_KEY', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
-            ['label' => 'Google Place ID', 'field' => 'google_place_id', 'value' => env('GOOGLE_PLACE_ID', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
             ['label' => 'Email User', 'field' => 'email_user', 'value' => env('MAIL_USERNAME', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
             ['label' => 'Email Pass', 'field' => 'email_pass', 'value' => env('MAIL_PASSWORD', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
             ['label' => 'Captcha Secret Key', 'field' => 'captcha_secret_key', 'value' => env('CAPTCHA_SECRET_KEY', ''), 'type' => InfoTypeEnum::CREDENTIAL->value],
@@ -35,7 +34,8 @@ class InfoSeeder extends Seeder
             ['label' => 'Email', 'field' => 'email', 'value' => "info@homeevolutioncontractor.com"],
             ['label' => 'Phone', 'field' => 'phone', 'value' => "+1 (315) 412 6744"],
             ['label' => 'Address', 'field' => 'address', 'value' => "618 N Lowell Ave, Syracuse, NY 13204"],
-            ['label' => 'Google Place', 'field' => 'google_place', 'value' => "https://maps.app.goo.gl/nekwfwm4kGWQt2q89"],
+            ['label' => 'Google Place ID', 'field' => 'google_place_id', 'value' => env('GOOGLE_PLACE_ID', '')],
+            ['label' => 'Google Place', 'field' => 'google_place', 'value' => "https://maps.app.goo.gl/EvW7kkWeEw3CNWnA9"],
             ['label' => 'Facebook', 'field' => 'facebook', 'value' => "https://facebook.com/profile.php?id=100088835782357"],
             ['label' => 'Captcha Site Key', 'field' => 'captcha_site_key', 'value' => env('CAPTCHA_SITE_KEY', '')],
         ]);
@@ -43,7 +43,7 @@ class InfoSeeder extends Seeder
         // textareas
         DB::table('infos')->insert([
             ['label' => 'Summary', 'field' => 'summary', 'value' => "At Home Evolution Contractor, our mission is to empower homeowners to achieve their dream living spaces through exceptional craftsmanship and customer satisfaction. Founded on integrity, quality, and community, we deliver top-notch roofing, siding, and gutter services with a personal touch. Our experienced professionals bring expertise and dedication to every project, ensuring seamless execution and stunning results.", 'type' => InfoTypeEnum::TEXTAREA->value],
-            ['label' => 'Iframe Src Map', 'field' => 'map', 'value' => "https://google.com/maps/embed?pb=!1m18!1m12!1m3!1d317528.82410737715!2d-76.5683052925714!3d43.490052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa6d3e01436356e09%3A0x8be913e84fafb8c4!2sHome%20Evolution%20Contractor!5e1!3m2!1ses!2sec!4v1792181012444!5m2!1ses!2sec", 'type' => InfoTypeEnum::TEXTAREA->value],
+            ['label' => 'Iframe Src Map', 'field' => 'map', 'value' => "https://google.com/maps/embed?pb=!1m18!1m12!1m3!1d1043016.7849094851!2d-76.1970545!3d43.49005199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa6d3e01436356e09%3A0x8be913e84fafb8c4!2sHome%20Evolution%20Contractor!5e1!3m2!1ses!2sec!4v1792444911683!5m2!1ses!2sec", 'type' => InfoTypeEnum::TEXTAREA->value],
         ]);
 
         // markdowns
